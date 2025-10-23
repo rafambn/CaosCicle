@@ -33,12 +33,12 @@ Este documento detalha as tarefas necessárias para desenvolver a Versão Mínim
 
 ## Etapa 4: Loop de Jogo e Reset (Prestígio)
 
-- [ ] **4.1. Condição de Fim de Run:** Implementar a lógica que detecta quando o desequilíbrio ultrapassa o limite (ex: 80%) e encerra a rodada atual.
-- [ ] **4.2. Cálculo de Boost:** Ao final da run, calcular o "Boost de Equilíbrio" com base no tempo sobrevivido.
-- [ ] **4.3. Mecanismo de Reset:**
-    - [ ] Criar uma função que zera os recursos e estruturas.
-    - [ ] Aplicar o boost permanente acumulado para a próxima rodada (ex: tornando a faixa de equilíbrio mais estável).
-- [ ] **4.4. UI de Fim de Jogo:** Mostrar uma tela simples de "Fim de Run" com as estatísticas (tempo, boost ganho) e um botão para recomeçar.
+- [x] **4.1. Condição de Fim de Run:** Implementar a lógica que detecta quando o desequilíbrio ultrapassa o limite (ex: 80%) e encerra a rodada atual.
+- [x] **4.2. Cálculo de Boost:** Ao final da run, calcular o "Boost de Equilíbrio" com base no tempo sobrevivido.
+- [x] **4.3. Mecanismo de Reset:**
+    - [x] Criar uma função que zera os recursos e estruturas.
+    - [x] Aplicar o boost permanente acumulado para a próxima rodada (ex: tornando a faixa de equilíbrio mais estável).
+- [x] **4.4. UI de Fim de Jogo:** Mostrar uma tela simples de "Fim de Run" com as estatísticas (tempo, boost ganho) e um botão para recomeçar.
 
 ## Etapa 5: Persistência de Dados
 

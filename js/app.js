@@ -1,9 +1,48 @@
 import Phaser from 'phaser';
 
+// Cena para a Interface do Usuário (incluindo tela de Game Over)
+class UIScene extends Phaser.Scene {
+  constructor() {
+    super({ key: 'UIScene' });
+  }
+
+  create() {
+    const mainScene = this.scene.get('MainScene');
+
+    // Painel de Game Over (inicialmente invisível)
+    this.gameOverPanel = this.add.container(400, 300).setVisible(false);
+    const background = this.add.graphics().fillStyle(0x111111, 0.9).fillRect(-200, -150, 400, 300);
+    const title = this.add.text(0, -100, 'O Ciclo se Reinicia', { fontSize: '28px' }).setOrigin(0.5);
+    this.timeSurvivedText = this.add.text(0, -40, '', { fontSize: '18px' }).setOrigin(0.5);
+    this.boostGainedText = this.add.text(0, -10, '', { fontSize: '18px' }).setOrigin(0.5);
+    const restartButton = this.add.rectangle(0, 80, 150, 50, 0x00ff00).setInteractive();
+    const restartText = this.add.text(0, 80, 'Recomeçar', { fill: '#000' }).setOrigin(0.5);
+
+    this.gameOverPanel.add([background, title, this.timeSurvivedText, this.boostGainedText, restartButton, restartText]);
+
+    restartButton.on('pointerdown', () => {
+      this.gameOverPanel.setVisible(false);
+      // Reinicia a cena principal, passando o novo bônus acumulado
+      mainScene.scene.restart({ balanceBoost: this.nextBoost });
+    });
+
+    // Ouvir o evento de fim de jogo
+    mainScene.events.on('gameOver', (stats) => {
+      this.timeSurvivedText.setText(`Tempo Sobrevivido: ${stats.timeSurvived.toFixed(2)}s`);
+      this.boostGainedText.setText(`Bônus Ganhos: +${stats.boostGained.toFixed(4)}%`);
+      this.nextBoost = stats.newTotalBoost; // Armazena o novo total de bônus
+      this.gameOverPanel.setVisible(true);
+    });
+  }
+}
+
+// Cena Principal do Jogo
 class MainScene extends Phaser.Scene {
   constructor() {
     super({ key: 'MainScene' });
+  }
 
+  init(data) {
     // Variáveis de recursos
     this.creatorEssence = 0;
     this.chaoticEssence = 0;
@@ -13,32 +52,37 @@ class MainScene extends Phaser.Scene {
     this.chaoticStructures = 0;
     this.creatorStructureBaseCost = 10;
     this.chaoticStructureBaseCost = 10;
-  }
 
-  preload() {
-    // Carregue seus assets aqui
+    // Variáveis de Jogo
+    this.timeSurvived = 0;
+    this.imbalanceTimer = 0; // Temporizador para a condição de perda
+    this.imbalanceLimit = 0.8; // 80% de desequilíbrio para perder
+    this.balanceBoost = data.balanceBoost || 0; // Bônus de estabilidade da run anterior
   }
 
   create() {
+    // Garante que a UIScene esteja limpa e pronta
+    if (this.scene.get('UIScene')) {
+        this.scene.get('UIScene').scene.restart();
+    }
+    this.scene.launch('UIScene');
+
     // --- UI de Recursos ---
     this.creatorEssenceText = this.add.text(50, 30, 'Criação: 0', { fontSize: '20px', fill: '#fff' });
     this.chaoticEssenceText = this.add.text(650, 30, 'Caos: 0', { fontSize: '20px', fill: '#fff' });
+    this.boostText = this.add.text(300, 30, `Bônus: ${this.balanceBoost.toFixed(4)}%`, { fontSize: '16px', fill: '#00ffff' });
+    this.imbalanceTimerText = this.add.text(400, 470, '', { fontSize: '18px', fill: '#ff0000' }).setOrigin(0.5).setVisible(false);
 
     // --- Botões de Geração Manual ---
     const creatorButton = this.add.rectangle(150, 100, 180, 60, 0x00ff00).setInteractive();
     this.add.text(150, 100, 'Gerar Criação', { fill: '#000' }).setOrigin(0.5);
-    creatorButton.on('pointerdown', () => {
-      this.creatorEssence++;
-    });
+    creatorButton.on('pointerdown', () => { this.creatorEssence++; });
 
     const chaoticButton = this.add.rectangle(650, 100, 180, 60, 0xff0000).setInteractive();
     this.add.text(650, 100, 'Gerar Caos', { fill: '#000' }).setOrigin(0.5);
-    chaoticButton.on('pointerdown', () => {
-      this.chaoticEssence++;
-    });
+    chaoticButton.on('pointerdown', () => { this.chaoticEssence++; });
 
     // --- UI e Lógica das Estruturas ---
-    // Estrutura de Criação
     this.creatorStructureLevelText = this.add.text(50, 200, 'Sementes: 0', { fill: '#fff' });
     this.creatorStructureCostText = this.add.text(50, 220, 'Custo: 10 Caos', { fill: '#fff' });
     const buyCreatorStructureBtn = this.add.rectangle(150, 280, 180, 50, 0x00dd00).setInteractive();
@@ -51,7 +95,6 @@ class MainScene extends Phaser.Scene {
       }
     });
 
-    // Estrutura de Caos
     this.chaoticStructureLevelText = this.add.text(550, 200, 'Fragmentos: 0', { fill: '#fff' });
     this.chaoticStructureCostText = this.add.text(550, 220, 'Custo: 10 Criação', { fill: '#fff' });
     const buyChaoticStructureBtn = this.add.rectangle(650, 280, 180, 50, 0xdd0000).setInteractive();
@@ -64,48 +107,69 @@ class MainScene extends Phaser.Scene {
       }
     });
 
-
     // --- Barra de Equilíbrio ---
     this.balanceBarBackground = this.add.graphics();
     this.balanceBarBackground.fillStyle(0x555555, 1);
     this.balanceBarBackground.fillRect(150, 500, 500, 50);
-    this.balanceBar = this.add.graphics();
+    // Linha central para referência
+    this.add.graphics().fillStyle(0xffffff, 0.5).fillRect(398, 500, 4, 50);
+    // Marcador do equilíbrio
+    this.balanceMarker = this.add.rectangle(400, 525, 10, 40, 0xffff00);
   }
 
   getStructureCost(type) {
-    if (type === 'creator') {
-      return Math.floor(this.creatorStructureBaseCost * Math.pow(1.15, this.creatorStructures));
-    }
-    return Math.floor(this.chaoticStructureBaseCost * Math.pow(1.15, this.chaoticStructures));
+    const baseCost = type === 'creator' ? this.creatorStructureBaseCost : this.chaoticStructureBaseCost;
+    const level = type === 'creator' ? this.creatorStructures : this.chaoticStructures;
+    return Math.floor(baseCost * Math.pow(1.15, level));
   }
 
   update(time, delta) {
+    this.timeSurvived += delta / 1000; // em segundos
+
     // --- Geração Passiva ---
-    const passiveCreatorGeneration = (this.creatorStructures * 1) * (delta / 1000);
-    const passiveChaoticGeneration = (this.chaoticStructures * 1) * (delta / 1000);
-    this.creatorEssence += passiveCreatorGeneration;
-    this.chaoticEssence += passiveChaoticGeneration;
+    this.creatorEssence += (this.creatorStructures * 1) * (delta / 1000);
+    this.chaoticEssence += (this.chaoticStructures * 1) * (delta / 1000);
 
     // --- Atualizar UI ---
     this.creatorEssenceText.setText('Criação: ' + Math.floor(this.creatorEssence));
     this.chaoticEssenceText.setText('Caos: ' + Math.floor(this.chaoticEssence));
-
     this.creatorStructureLevelText.setText('Sementes: ' + this.creatorStructures);
     this.creatorStructureCostText.setText('Custo: ' + this.getStructureCost('creator') + ' Caos');
-
     this.chaoticStructureLevelText.setText('Fragmentos: ' + this.chaoticStructures);
     this.chaoticStructureCostText.setText('Custo: ' + this.getStructureCost('chaotic') + ' Criação');
 
-    // --- Atualizar Barra de Equilíbrio ---
+    // --- Lógica de Equilíbrio e Fim de Jogo ---
     const totalEssence = this.creatorEssence + this.chaoticEssence;
-    let balance = 0;
+    let balance = 0; // de -1 (Caos total) a +1 (Criação total)
     if (totalEssence > 0) {
-      balance = Math.abs(this.creatorEssence - this.chaoticEssence) / totalEssence;
+      balance = (this.creatorEssence - this.chaoticEssence) / totalEssence;
     }
 
-    this.balanceBar.clear();
-    this.balanceBar.fillStyle(0xffff00, 1);
-    this.balanceBar.fillRect(150, 500, 500 * balance, 50);
+    // Atualiza a posição do marcador
+    const barCenter = 400;
+    const barWidth = 500;
+    this.balanceMarker.x = barCenter + (balance * (barWidth / 2));
+
+    // Nova lógica de fim de jogo com temporizador
+    const currentImbalanceLimit = this.imbalanceLimit - (this.balanceBoost / 100);
+    if (Math.abs(balance) > currentImbalanceLimit) {
+      this.imbalanceTimer += delta;
+      this.imbalanceTimerText.setText(`Colapso em: ${((10000 - this.imbalanceTimer) / 1000).toFixed(1)}s`);
+      this.imbalanceTimerText.setVisible(true);
+
+      if (this.imbalanceTimer >= 10000) {
+        const boostGained = this.timeSurvived / 100;
+        this.scene.pause();
+        this.events.emit('gameOver', {
+          timeSurvived: this.timeSurvived,
+          boostGained: boostGained,
+          newTotalBoost: this.balanceBoost + boostGained
+        });
+      }
+    } else {
+      this.imbalanceTimer = 0;
+      this.imbalanceTimerText.setVisible(false);
+    }
   }
 }
 
@@ -113,8 +177,8 @@ const config = {
   type: Phaser.AUTO,
   width: 800,
   height: 600,
-  parent: 'game-container', // ID do div no index.html
-  scene: [MainScene]
+  parent: 'game-container',
+  scene: [MainScene, UIScene] // Adiciona a nova cena
 };
 
 const game = new Phaser.Game(config);
