@@ -43,21 +43,42 @@ class MainScene extends Phaser.Scene {
   }
 
   init(data) {
-    // Variáveis de recursos
-    this.creatorEssence = 0;
-    this.chaoticEssence = 0;
+    const saveData = this.loadGame();
+
+    // Se 'data' existir, significa que a cena foi reiniciada (prestígio)
+    if (data && data.balanceBoost) {
+      this.creatorEssence = 0;
+      this.chaoticEssence = 0;
+      this.creatorStructures = 0;
+      this.chaoticStructures = 0;
+      this.timeSurvived = 0;
+      this.balanceBoost = data.balanceBoost;
+    } else if (saveData) {
+      // Se não, tenta carregar do localStorage
+      this.creatorEssence = saveData.creatorEssence || 0;
+      this.chaoticEssence = saveData.chaoticEssence || 0;
+      this.creatorStructures = saveData.creatorStructures || 0;
+      this.chaoticStructures = saveData.chaoticStructures || 0;
+      this.timeSurvived = saveData.timeSurvived || 0;
+      this.balanceBoost = saveData.balanceBoost || 0;
+    } else {
+      // Se não houver nada, começa um jogo do zero
+      this.creatorEssence = 0;
+      this.chaoticEssence = 0;
+      this.creatorStructures = 0;
+      this.chaoticStructures = 0;
+      this.timeSurvived = 0;
+      this.balanceBoost = 0;
+    }
 
     // Variáveis das estruturas
-    this.creatorStructures = 0;
-    this.chaoticStructures = 0;
     this.creatorStructureBaseCost = 10;
     this.chaoticStructureBaseCost = 10;
 
     // Variáveis de Jogo
-    this.timeSurvived = 0;
     this.imbalanceTimer = 0; // Temporizador para a condição de perda
     this.imbalanceLimit = 0.8; // 80% de desequilíbrio para perder
-    this.balanceBoost = data.balanceBoost || 0; // Bônus de estabilidade da run anterior
+    this.isGameOver = false; // Flag para controlar o estado de fim de jogo
   }
 
   create() {
@@ -115,6 +136,57 @@ class MainScene extends Phaser.Scene {
     this.add.graphics().fillStyle(0xffffff, 0.5).fillRect(398, 500, 4, 50);
     // Marcador do equilíbrio
     this.balanceMarker = this.add.rectangle(400, 525, 10, 40, 0xffff00);
+
+    // --- Salvamento Automático e ao Sair ---
+    this.time.addEvent({
+      delay: 30000, // 30 segundos
+      callback: this.saveGame,
+      callbackScope: this,
+      loop: true
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') {
+        this.saveGame();
+      }
+    });
+  }
+
+  saveGame() {
+    // Não salva se o jogo já tiver acabado, para não sobrescrever o save de reset
+    if (this.isGameOver) return;
+
+    const saveData = {
+      creatorEssence: this.creatorEssence,
+      chaoticEssence: this.chaoticEssence,
+      creatorStructures: this.creatorStructures,
+      chaoticStructures: this.chaoticStructures,
+      timeSurvived: this.timeSurvived,
+      balanceBoost: this.balanceBoost
+    };
+    localStorage.setItem('caosCicleSave', JSON.stringify(saveData));
+    console.log('Jogo salvo!');
+  }
+
+  saveResetState(newBoost) {
+    const saveData = {
+      creatorEssence: 0,
+      chaoticEssence: 0,
+      creatorStructures: 0,
+      chaoticStructures: 0,
+      timeSurvived: 0,
+      balanceBoost: newBoost
+    };
+    localStorage.setItem('caosCicleSave', JSON.stringify(saveData));
+    console.log('Estado de reset salvo!');
+  }
+
+  loadGame() {
+    const savedData = localStorage.getItem('caosCicleSave');
+    if (savedData) {
+      return JSON.parse(savedData);
+    }
+    return null;
   }
 
   getStructureCost(type) {
@@ -124,6 +196,8 @@ class MainScene extends Phaser.Scene {
   }
 
   update(time, delta) {
+    if (this.isGameOver) return; // Para completamente a lógica de update se o jogo acabou
+
     this.timeSurvived += delta / 1000; // em segundos
 
     // --- Geração Passiva ---
@@ -158,12 +232,17 @@ class MainScene extends Phaser.Scene {
       this.imbalanceTimerText.setVisible(true);
 
       if (this.imbalanceTimer >= 10000) {
+        this.isGameOver = true; // Ativa a flag de fim de jogo
         const boostGained = this.timeSurvived / 100;
+        const newTotalBoost = this.balanceBoost + boostGained;
+
+        this.saveResetState(newTotalBoost); // Salva o estado de reset imediatamente
+
         this.scene.pause();
         this.events.emit('gameOver', {
           timeSurvived: this.timeSurvived,
           boostGained: boostGained,
-          newTotalBoost: this.balanceBoost + boostGained
+          newTotalBoost: newTotalBoost
         });
       }
     } else {

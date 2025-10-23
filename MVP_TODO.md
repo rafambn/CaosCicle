@@ -42,9 +42,9 @@ Este documento detalha as tarefas necessárias para desenvolver a Versão Mínim
 
 ## Etapa 5: Persistência de Dados
 
-- [ ] **5.1. Salvar Jogo:** Criar uma função para salvar o estado do jogo (recursos, níveis de estruturas, boosts permanentes) em formato JSON no `localStorage`.
-- [ ] **5.2. Carregar Jogo:** Criar uma função que, ao iniciar o jogo, verifica se há um save no `localStorage` e carrega os dados.
-- [ ] **5.3. Salvamento Automático:** Chamar a função de salvar periodicamente (ex: a cada 60 segundos).
+- [x] **5.1. Salvar Jogo:** Criar uma função para salvar o estado do jogo (recursos, níveis de estruturas, boosts permanentes) em formato JSON no `localStorage`.
+- [x] **5.2. Carregar Jogo:** Criar uma função que, ao iniciar o jogo, verifica se há um save no `localStorage` e carrega os dados.
+- [x] **5.3. Salvamento Automático:** Chamar a função de salvar periodicamente (ex: a cada 60 segundos).
 
 ## Etapa 6: Polimento Mínimo do MVP
 
