@@ -24,12 +24,12 @@ Este documento detalha as tarefas necessárias para desenvolver a Versão Mínim
 
 ## Etapa 3: Estruturas e Geração Passiva (Idle)
 
-- [ ] **3.1. Criar UI das Estruturas:** Adicionar botões na UI para comprar a primeira estrutura de Criação ("Sementes Primordiais") e de Destruição ("Fragmentos do Vazio").
-- [ ] **3.2. Lógica de Compra:**
-    - [ ] Implementar a lógica de custo (ex: comprar "Sementes Primordiais" consome Essência Caótica).
-    - [ ] Descontar os recursos e registrar o nível da estrutura comprada.
-    - [ ] Implementar o aumento de custo a cada novo nível (Custo = Base * 1.15 ^ Nível).
-- [ ] **3.3. Geração Passiva:** No loop de atualização do jogo (`update()`), adicionar a geração passiva de essências com base no número e nível das estruturas.
+- [x] **3.1. Criar UI das Estruturas:** Adicionar botões na UI para comprar a primeira estrutura de Criação ("Sementes Primordiais") e de Destruição ("Fragmentos do Vazio").
+- [x] **3.2. Lógica de Compra:**
+    - [x] Implementar a lógica de custo (ex: comprar "Sementes Primordiais" consome Essência Caótica).
+    - [x] Descontar os recursos e registrar o nível da estrutura comprada.
+    - [x] Implementar o aumento de custo a cada novo nível (Custo = Base * 1.15 ^ Nível).
+- [x] **3.3. Geração Passiva:** No loop de atualização do jogo (`update()`), adicionar a geração passiva de essências com base no número e nível das estruturas.
 
 ## Etapa 4: Loop de Jogo e Reset (Prestígio)
 
