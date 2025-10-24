@@ -1,0 +1,480 @@
+# TODO - CICLO DO CAOS: O ZELADOR DO ÚLTIMO RELÓGIO
+# Funcionalidades Restantes (Versão Expandida com Narrativa Temática)
+# Status: Priorizado por fase de desenvolvimento
+
+================================================================================
+FASE 0: FUNDAÇÃO NARRATIVA (Essencial para MVP)
+================================================================================
+
+## 0.1 Renomeação de Recursos e UI (PRIORITY)
+- [ ] Renomear "Essência Criadora" → "Chrono-Essence" em toda a codebase
+  - Arquivo: js/app.js - resources object
+  - UI: Display text, button labels
+  - localStorage: Schema de save
+- [ ] Renomear "Essência Caótica" → "Entropy Shards"
+  - Arquivo: js/app.js - resources object
+  - UI: Display text, button labels
+  - localStorage: Schema de save
+- [ ] Renomear barra de "Equilíbrio" → "Phase Deviation"
+  - Barra visual: Rótulo e tooltip
+  - Textos do jogo
+  - Cálculos internos (manter a mesma lógica, mudar apenas nome)
+- [ ] Renomear "Boost de Equilíbrio" → "Aeon Fragments"
+  - Display em UI (top corner ou painel de progressão)
+  - localStorage: Schema de save
+  - Sistema de compras (Horological Mastery)
+- [ ] Renomear "Prestige" → "Horological Mastery"
+  - Painel de upgrades permanentes
+  - UI de menu
+  - Descrições e flavor text
+
+## 0.2 Game Over e Reset Narrativo
+- [ ] Atualizar texto de Game Over (decorativo):
+  *"The gears have shattered. Time fractures. Resetting to last stable moment... but something remains. Memory persists."*
+- [ ] Implementar fade-in gradual de "Phase Deviation" antes de crashear (visual drama)
+- [ ] Painel de Game Over mostra:
+  - Tempo Sobrevivido (em segundos legíveis ou minutos)
+  - Aeon Fragments Ganhos nesta run
+  - Total Cumulativo de Aeon Fragments
+  - Fragmento de lore desbloqueado (se milestone atingido)
+- [ ] Adicionar botão "Witness the Next Cycle" em vez de "Play Again"
+
+## 0.3 Flavor Text Base (CRIAÇÃO - Ordem)
+- [ ] "Mainspring Stabilizers":
+  Flavor: "Every second costs eternity. These springs ensure time flows, never stops."
+  Description: "Gera 1 Chrono-Essence por segundo"
+- [ ] "Gear Calibration Arrays":
+  Flavor: "Precision beyond measure. Teeth mesh perfectly across dimensional boundaries."
+  Description: "+5% eficiência de Chrono-Essence"
+- [ ] "Temporal Governors":
+  Flavor: "Ancient mechanisms that remember when time flowed freely. They teach the gears patience."
+  Description: "+10% de produção base"
+- [ ] Estruturas Tier 4 & 5: Adicionar flavor text similar
+
+## 0.4 Flavor Text Base (DESTRUIÇÃO - Caos)
+- [ ] "Quantum Lubricant Injectors":
+  Flavor: "Liquid paradox. What flows backward also moves forward—both, neither, eternally."
+  Description: "Gera 1 Entropy Shard por segundo"
+- [ ] "Paradox Coils":
+  Flavor: "Coils that sing with contradictions. They make broken things move faster."
+  Description: "+5% velocidade de eventos"
+- [ ] "Possibility Valves":
+  Flavor: "Every path not taken floods through here. The unrealized futures yearn for form."
+  Description: "+10% geração de Entropy Shards"
+- [ ] Estruturas Tier 4 & 5: Adicionar flavor text similar
+
+================================================================================
+FASE 1: EVENTOS DINÂMICOS TEMÁTICOS
+================================================================================
+
+## 1.1 Sistema de Eventos (Core Mechanic)
+- [ ] Refatorar sistema de eventos aleatórios para suportar eventos nomeados/narrativos
+- [ ] Implementar cooldown entre eventos: 30s-60s (configurável)
+- [ ] Sistema de trigger baseado em Phase Deviation:
+  - Eventos de ORDEM acionados quando Phase Deviation > 60% (favorecendo Chrono-Essence)
+  - Eventos de CAOS acionados quando Phase Deviation > 60% (favorecendo Entropy Shards)
+  - Eventos NEUTROS independentes (aleatórios)
+
+## 1.2 Eventos de ORDEM (3-5 eventos base)
+### "The Frozen Gear" (A Engrenagem Congelada)
+- [ ] Trigger: Phase Deviation > 60% (Ordem dominante)
+- [ ] Efeito: Produção de Entropy Shards -25% por 90 segundos
+- [ ] Visual: Ícone de engrenagem com cristal de gelo
+- [ ] Flavor Text: "An Architect has seized a mechanism. The gears grind slower. Freedom crystallizes into stasis."
+- [ ] Pop-up no início: Mostra duração e debuff
+
+### "Temporal Anchor Surge" (Ondulação de Âncora Temporal)
+- [ ] Trigger: Phase Deviation > 60% (Ordem dominante)
+- [ ] Efeito: +30% geração de Chrono-Essence por 60 segundos
+- [ ] Visual: Ícone de âncora brilhante
+- [ ] Flavor Text: "Anchors pulse with power. Time settles. The clock finds its rhythm again, but for how long?"
+- [ ] Pop-up: Duração e buff positivo
+
+### "The Hour Hand Trembles" (O Ponteiro das Horas Estremece)
+- [ ] Trigger: Phase Deviation > 60% (Ordem dominante) + contexto de tensão
+- [ ] Efeito: +5% tolerância temporária de Phase Deviation (30s)
+- [ ] Visual: Ponteiro de relógio tremendo
+- [ ] Flavor Text: "Reality holds its breath. Something vast is looking at the mechanism. You feel seen."
+- [ ] Nota: Evento "neutro" que traz alívio psicológico
+
+## 1.3 Eventos de CAOS (3-5 eventos base)
+### "Paradox Cascade" (Cascata de Paradoxo)
+- [ ] Trigger: Phase Deviation > 60% (Caos dominante)
+- [ ] Efeito: Entropy Shards jump +40%, mas Phase Deviation risk aumenta (+15% para crashe mais rápido)
+- [ ] Visual: Múltiplas camadas piscando (multiverse glitch)
+- [ ] Flavor Text: "Contradictions flood the system. Futures that should never meet collide. The clock screams."
+- [ ] Pop-up: Warning de risco alto
+
+### "Temporal Rupture" (Ruptura Temporal)
+- [ ] Trigger: Phase Deviation > 60% (Caos dominante)
+- [ ] Efeito: -30% Chrono-Essence generation por 2 minutos, MAS +50% Aeon Fragment gain se sobreviver
+- [ ] Visual: Rachadura visual na barra ou background
+- [ ] Flavor Text: "A crack appears in the gears. Time leaks from the edges. But from the fracture, wisdom flows."
+- [ ] Pop-up: Mostra trade-off risco/recompensa
+
+### "Quantum Lubricant Surge" (Injeção de Lubrificante Quântico)
+- [ ] Trigger: Phase Deviation > 60% (Caos dominante)
+- [ ] Efeito: +50% Entropy Shard generation por 45s, Phase Deviation cresce mais rápido (risco exponencial)
+- [ ] Visual: Gota de óleo fluindo, barra piscando
+- [ ] Flavor Text: "The Accelerators flood the system with possibility. The clock spins faster, faster. Control slips."
+- [ ] Pop-up: Mensagem de alerta e oportunidade
+
+## 1.4 Eventos NEUTROS (2-3 eventos)
+### "The Clock Ticks Twice" (O Relógio Marca Duas Vezes)
+- [ ] Trigger: Phase Deviation < 10% (equilíbrio perfeito)
+- [ ] Efeito: Produção x1.5 por 30 segundos
+- [ ] Visual: Dois ponteiros se sobrepondo brevemente
+- [ ] Flavor Text: "Perfect harmony. The mechanisms dance. Just for a moment, time sings."
+- [ ] Raro, apenas quando há harmonia completa
+
+### "Silent Maintenance Window" (Janela de Manutenção Silenciosa)
+- [ ] Trigger: Aleatório, qualquer Phase Deviation
+- [ ] Efeito: 20s sem novos eventos (pausa narrativa)
+- [ ] Visual: Tudo fica mais silencioso/opaco
+- [ ] Flavor Text: "The clock rests. You can breathe. These moments are precious. They don't last."
+- [ ] Propósito: Dar respiro emocional ao jogador
+
+### "Echoes from Your Last Shift" (Ecos de Seu Último Turno)
+- [ ] Trigger: Aleatório (raro, ~5% por minuto)
+- [ ] Efeito: Recupera 5% de recursos baseado em como a run anterior terminou
+- [ ] Visual: Sombra translúcida de recursos anteriores
+- [ ] Flavor Text: "A memory surfaces. You remember... a voice calling your name. What was it?"
+- [ ] Requer: Rastreamento de estado da run anterior (localStorage)
+
+## 1.5 Fragmentos de Lore via Eventos (Tier 2+)
+### "Temporal Echo from the Last Era" (Eco Temporal da Última Era)
+- [ ] Trigger: Aleatório raro + Aeon Fragments > 10 (significa que você tem experiência)
+- [ ] Efeito: Desbloqueia fragmento de lore sobre o relógio
+- [ ] Visual: Memória brilhante ou holograma
+- [ ] Flavor Text: "A fragment of memory: 'The first Keeper built this from the ruins of a dead universe. Why?'"
+- [ ] Sistema: Cada fragmento de lore é armazenado, pode ser visualizado em menu
+
+================================================================================
+FASE 2: SISTEMA DE HOROLOGICAL MASTERY EXPANDIDO
+================================================================================
+
+## 2.1 UI do Painel de Horological Mastery
+- [ ] Criar menu/painel acessível (botão em UI principal)
+- [ ] Mostrar:
+  - Total de Aeon Fragments acumulados
+  - Lista de upgrades desbloqueáveis (com custo visível)
+  - Upgrades já comprados (com checkmark)
+  - Próximo milestone de lore (ex: "Próximo fragmento em 10 Aeon Fragments")
+
+## 2.2 Upgrades Tier 1-5 (Horological Mastery)
+
+### Primordial Oils (Óleos Primordiais) - 10 Aeon Fragments
+- [ ] Efeito: +5% Phase Deviation tolerance no início de cada run
+- [ ] Flavor: "Ancient oils extracted from defunct timelines. They make the gears more forgiving."
+- [ ] Implementação: Adiciona 5% ao imbalanceLimit no início de MainScene
+- [ ] Desbloqueável: Tier 1 (automaticamente na primeira run > 10s)
+
+### Ancient Blueprints (Planos Antigos) - 25 Aeon Fragments
+- [ ] Efeito: Todas as estruturas começam +10% mais eficientes em novas runs
+- [ ] Flavor: "Designs from civilizations that mastered temporal mechanics. You're beginning to remember."
+- [ ] Implementação: Multiplicador de 1.1x em getStructureProduction()
+- [ ] Desbloqueável: Tier 2 (após comprar Primordial Oils)
+
+### Time-Worn Wisdom (Sabedoria Desgastada pelo Tempo) - 50 Aeon Fragments
+- [ ] Efeito: Vê qual evento ocorrerá nos próximos 30s (UI tooltip)
+- [ ] Flavor: "Memories of past eras crystallize. You see patterns. Repetition. Purpose?"
+- [ ] Implementação: Função que calcula próximo evento e mostra em UI (opcional preview)
+- [ ] Desbloqueável: Tier 3 (após Total Aeon Fragments > 30)
+
+### Eternal Patience (Paciência Eterna) - 75 Aeon Fragments
+- [ ] Efeito: -15% severidade de todas as penalidades de eventos (multiplicador 0.85)
+- [ ] Flavor: "You've done this before. Many times. Your hands know the rhythm."
+- [ ] Implementação: Modificador aplicado em eventos negativos
+- [ ] Desbloqueável: Tier 4 (após Total Aeon Fragments > 60)
+
+### Causal Insight (Compreensão Causal) - 150 Aeon Fragments
+- [ ] Efeito: +25% Aeon Fragment gain (runs pagam 1.25x mais bônus)
+- [ ] Flavor: "You understand now: Each cycle feeds the next. You are trapped. But you are learning."
+- [ ] Implementação: Multiplicador 1.25x em cálculo de Aeon Fragments no fim da run
+- [ ] Desbloqueável: Tier 5 (após Total Aeon Fragments > 100)
+
+## 2.3 Milestones de Lore
+- [ ] A cada 10 Aeon Fragments obtidos cumulativamente (10, 20, 30, 40...), desbloqueia fragmento
+- [ ] Fragmentos são armazenados em localStorage
+- [ ] UI para visualizar Lore Collection (menu separado ou overlay)
+
+### Fragmentos Base (12 no total para progressão completa):
+Fragmento 1 (10 AF): "Who am I? Why do I remember the last cycle?"
+Fragmento 2 (20 AF): "This clock... it's been running for eons."
+Fragmento 3 (30 AF): "I sense two factions. The Accelerators. The Architects."
+Fragmento 4 (40 AF): "The Accelerators want time to end. The Architects want it to freeze."
+Fragmento 5 (50 AF): "Both are destroying it. And I'm the only one who can stop them."
+Fragmento 6 (60 AF): "Wait. Have I done this before?"
+Fragmento 7 (70 AF): "The Accelerators and the Architects... they are part of ME. Fragmented."
+Fragmento 8 (80 AF): "Each cycle, I lose more of myself. Or remember more? Time is confusing."
+Fragmento 9 (90 AF): "I am the last Keeper. Or the first? The clock doesn't remember."
+Fragmento 10 (100 AF): "Maybe it never did."
+Fragmento 11 (110 AF): "One more truth remains. Hidden in the 12th mechanism..."
+Fragmento 12 (120 AF): "[FINAL TWIST] You are trapped in a loop. The last Keeper was you. In another cycle."
+
+## 2.4 Meta-Progressão de Modos
+- [ ] Hardcore Mode: Desbloqueado em 100 AF total
+  - Phase Deviation tolerance -20%
+  - +50% Aeon Fragment gain
+  - Visual: UI diferente (vermelho escuro)
+  - Opcional: Toggle em menu
+- [ ] Asymptote Challenge: Desbloqueado em 250 AF total
+  - Cada run subseqüente fica 5% mais difícil (Phase Deviation tolerance -5% cumulativo)
+  - Recompensa exponencial (2x Aeon Fragments em run 10, 4x em run 20, etc.)
+  - Visual: UI com "Run Counter" animado
+
+================================================================================
+FASE 3: ESTRUTURAS COM TIER COMPLETO (5 Tiers)
+================================================================================
+
+## 3.1 Criação (Ordem) - Estruturas Tier 2-5 com Flavor
+- [ ] Tier 1: Mainspring Stabilizers - JÁ EXISTE (adicionar flavor text)
+- [ ] Tier 2: Gear Calibration Arrays
+  - Custo: 50 Entropy Shards
+  - Efeito: +5% eficiência de Chrono-Essence
+  - Flavor: "Precision beyond measure. Teeth mesh perfectly across dimensional boundaries."
+  - Visual: Múltiplas engrenagens alinhadas
+- [ ] Tier 3: Temporal Governors
+  - Custo: 200 Entropy Shards
+  - Efeito: +10% de produção base
+  - Flavor: "Ancient mechanisms that remember when time flowed freely. They teach the gears patience."
+  - Visual: Governador com ponteiro (como regulador de vapor)
+- [ ] Tier 4: Eternal Keepers
+  - Custo: 1000 Entropy Shards
+  - Efeito: +15% Phase Deviation tolerance
+  - Flavor: "Sentinels who've watched galaxies age. Their presence calms the rhythm."
+  - Visual: Olho cósmico vigilante
+- [ ] Tier 5: Primordial Pendulums
+  - Custo: 5000 Entropy Shards
+  - Efeito: +20% Aeon Fragment gains on reset
+  - Flavor: "The first mechanisms ever crafted. Time remembers them. They remember time."
+  - Visual: Pêndulo oscilando com galáxias
+
+## 3.2 Destruição (Caos) - Estruturas Tier 2-5 com Flavor
+- [ ] Tier 1: Quantum Lubricant Injectors - JÁ EXISTE (adicionar flavor text)
+- [ ] Tier 2: Paradox Coils
+  - Custo: 50 Chrono-Essence
+  - Efeito: +5% velocidade de eventos
+  - Flavor: "Coils that sing with contradictions. They make broken things move faster."
+  - Visual: Bobina com energia paradoxal
+- [ ] Tier 3: Possibility Valves
+  - Custo: 200 Chrono-Essence
+  - Efeito: +10% Entropy Shard generation
+  - Flavor: "Every path not taken floods through here. The unrealized futures yearn for form."
+  - Visual: Válvula com múltiplas dimensões
+- [ ] Tier 4: Singularity Cores
+  - Custo: 1000 Chrono-Essence
+  - Efeito: +20% boost gains on catastrophic Phase Deviation
+  - Flavor: "Black holes where time folds. Risk everything. The void rewards the reckless."
+  - Visual: Buraco negro com acreção
+- [ ] Tier 5: Apocalypse Engines
+  - Custo: 5000 Chrono-Essence
+  - Efeito: -30% time to Phase Deviation catastrophe (RISCO ALTO)
+  - Flavor: "Build these if you dare. They accelerate the end so you can begin again, amplified."
+  - Visual: Máquina caótica com engrenagens desalinhadas
+
+================================================================================
+FASE 4: MONETIZAÇÃO COM NARRATIVA
+================================================================================
+
+## 4.1 Integração de Ads Temática
+- [ ] Google AdSense: Banners não-intrusivas (top/bottom)
+- [ ] Vídeos Recompensados:
+  - "Watch a Temporal Echo" → +2x produção por 5 minutos
+  - "Witness the Future" → Reset parcial de Phase Deviation (-20%)
+  - "Extend Your Shift" → +30% Aeon Fragment gain na próxima run (1x uso)
+- [ ] Flavor: Ads aparecem com narrativa ("A temporal merchant appears...")
+
+## 4.2 Pop-ups Não-Intrusivos
+- [ ] Ads só aparecem após 30s de gameplay (não logo de início)
+- [ ] Máximo 1 ad a cada 2-3 minutos
+- [ ] Botão "Dismiss" sempre visível
+- [ ] Testar cross-browser
+
+================================================================================
+FASE 5: RECURSOS NEUTROS (Primordial Oils)
+================================================================================
+
+## 5.1 Primordial Oils (Recurso Neutro Raro)
+- [ ] Geração: Quando Phase Deviation < 5% por 10+ segundos
+- [ ] Acúmulo: Armazenado em localStorage
+- [ ] Visual: Ícone de óleo dourado/nebuloso
+- [ ] Uso: Boosts temporários de alta potência
+  - +50% produção por 30s (custo: 1 Primordial Oil)
+  - -50% Phase Deviation (reset parcial, custo: 1 Primordial Oil)
+  - +100% Aeon Fragment gain nesta run (custo: 2 Primordial Oils, uma vez por run)
+
+## 5.2 UI para Primordial Oils
+- [ ] Display de quantidade em corner
+- [ ] Botão de compra/uso de boosts (dropdown menu)
+- [ ] Descrição de cada boost com flavor text
+
+================================================================================
+FASE 6: PROGRESSÃO OFFLINE MELHORADA
+================================================================================
+
+## 6.1 Cálculo de Tempo Offline
+- [ ] Armazenar timestamp de último save
+- [ ] Ao retornar: Calcular diferença de tempo
+- [ ] Gerar 50% da produção normal durante tempo offline
+- [ ] Pop-up "Welcome back, Keeper" com resumo
+
+## 6.2 Limites Offline
+- [ ] Máximo 24 horas de offline progression (limitação realista)
+- [ ] Após 24h, aviso: "The clock cannot remember so far back. You've missed memories."
+- [ ] Ads multiplier dobra ganhos offline se assistido
+
+================================================================================
+FASE 7: ELEMENTOS VISUAIS & UX NARRATIVOS
+================================================================================
+
+## 7.1 Animações Temáticas
+- [ ] Partículas CSS para cliques (engrenagens caindo, óleo fluindo)
+- [ ] Barra de Phase Deviation: Oscila como pêndulo
+- [ ] Ponteiros de relógio animados em background
+- [ ] Transições suaves entre fases de desequilíbrio
+- [ ] Fade-in/out de eventos narrativos
+
+## 7.2 Números Romanos & Estética Relógio
+- [ ] Background subtil com XII, VI, III, IX (números de relógio)
+- [ ] Números aparecem nos cantos, semi-transparentes
+- [ ] Fontes: Serif para números (elegância)
+- [ ] Cores: Ouro/latão para Ordem, Roxo/verde para Caos
+
+## 7.3 Áudio Adaptativo
+- [ ] Tique-taque de relógio (suave, sempre presente)
+- [ ] Tom muda com Phase Deviation (mais rápido = maior risco)
+- [ ] Sons de evento (sino para Ordem, assobio para Caos)
+- [ ] Botão mute (importante para mobile)
+- [ ] Opcional: Background musical que evolui
+
+## 7.4 Touch & Responsive
+- [ ] Mobile layout vertical: Botões de clique amplos (140px × 50px)
+- [ ] Desktop: Layout horizontal padrão
+- [ ] Media queries para <768px e ≥768px
+- [ ] Barra de Phase Deviation sempre central e clara
+- [ ] Números legíveis em todas as resoluções
+
+================================================================================
+FASE 8: ACESSIBILIDADE & QUALIDADE
+================================================================================
+
+## 8.1 ARIA Labels & Screen Readers
+- [ ] Descrever estruturas e botões com ARIA labels
+- [ ] Textos de eventos narrativos também em alt-text
+- [ ] Cores não como único indicador (usar padrões também)
+
+## 8.2 High Contrast Mode
+- [ ] Opção de UI com cores de alto contraste
+- [ ] Menu de acessibilidade
+
+## 8.3 Performance
+- [ ] Otimizar para runs longas (1 hora+)
+- [ ] Lazy-load de images/áudio
+- [ ] localStorage não deve exceder 5MB
+
+================================================================================
+FASE 9: DEBUGGING & BALANCEAMENTO
+================================================================================
+
+## 9.1 Debug Mode
+- [ ] Tecla (ex: `D` key) ativa debug panel
+- [ ] Mostra valores internos: Phase Deviation%, Recursos, Timers de evento
+- [ ] Permite: Trigger eventos manualmente, dar Aeon Fragments, resetar
+
+## 9.2 Estatísticas Detalhadas
+- [ ] Rastrear: Total de cliques, tempo total jogado, melhor run, eventos mais frequentes
+- [ ] Painel de estatísticas acessível
+
+## 9.3 Balanceamento
+- [ ] Alvo: Primeiras runs 5-10 minutos, com boosts 20-40 minutos
+- [ ] Testar em mobile e desktop
+- [ ] Garantir que eventos não são game-breaking
+
+================================================================================
+FASE 10: DEPLOY & TESTES FINAIS
+================================================================================
+
+## 10.1 Testes Cross-Browser
+- [ ] Chrome (principal)
+- [ ] Firefox
+- [ ] Safari (desktop + iOS)
+- [ ] Mobile Chrome (Android)
+
+## 10.2 Testes de Performance
+- [ ] Runs longas (1-2 horas)
+- [ ] localStorage writes (não deve ficar lento)
+- [ ] Sem memory leaks
+
+## 10.3 Deploy
+- [ ] Build com `npm run build`
+- [ ] Verificar docs/ folder
+- [ ] Push para GitHub
+- [ ] GitHub Pages auto-deploya
+- [ ] Testar em produção
+
+================================================================================
+FASE 11: EXPANSÕES FUTURAS (Pós-MVP)
+================================================================================
+
+## 11.1 12 Mecanismos Secretos Completos
+- [ ] Expandir sistema de lore para 12 fragmentos épicos
+- [ ] Cada um revela aspecto da história do relógio
+- [ ] Final twist (fragmento 12) implementado
+
+## 11.2 Civilizações & NPCs (Expandido)
+- [ ] NPCs que reagem ao Phase Deviation
+- [ ] "The Accelerator High Council" (Caos)
+- [ ] "The Eternal Architects" (Ordem)
+- [ ] Diálogos baseados em estado do jogo
+
+## 11.3 Fusos Horários Dimensionais
+- [ ] Diferentes "áreas" do relógio (Fusos Dimensionais)
+- [ ] Cada um com estruturas e eventos únicos
+- [ ] Progressão não-linear
+
+## 11.4 Seasonal Events
+- [ ] Eventos temáticos (ex: "Cosmic Eclipse", "Time Vortex")
+- [ ] Rewards especiais
+- [ ] Narrativa expandida
+
+## 11.5 Achievements & Leaderboards Locais
+- [ ] Conquistas: "First Repair", "Survive 1 Hour", "Unlock All Lore"
+- [ ] Leaderboard local (top 10 runs mais longas)
+- [ ] Badges visuais na UI
+
+## 11.6 Sistema de Rewind (Mecânica Avançada)
+- [ ] Desfazer últimos 30-60 segundos de gameplay
+- [ ] Custo: Primordial Oils
+- [ ] Mecânica de risco/recompensa
+
+## 11.7 Backend Futuro (Se Necessário)
+- [ ] Cloud saves
+- [ ] Global leaderboards
+- [ ] Multiplayer elements
+
+================================================================================
+PRIORIZAÇÃO RECOMENDADA (Sprint 1)
+================================================================================
+1. Fase 0: Renomeação (1 dia) - ESSENCIAL
+2. Fase 0: Game Over Narrativo (4h)
+3. Fase 1: Eventos Base (2 dias) - CORE
+4. Fase 0: Flavor Text Base (1 dia)
+5. Fase 2: Horological Mastery UI (1 dia)
+6. Fase 7: Animações & Áudio Basic (1 dia)
+7. Fase 9: Balanceamento (1 dia)
+8. Fase 10: Deploy (4h)
+
+**Total: 7-8 dias de desenvolvimento** (alinhado com MVP original)
+
+================================================================================
+NOTAS GERAIS
+================================================================================
+
+- Toda UI deve refletir tema "Zelador do Relógio Cósmico"
+- Flavor text é OBRIGATÓRIO em toda estrutura/upgrade (não é cosmético, é narrativa)
+- Phase Deviation tolerance deve ser ajustável via upgrades (mecânica de progressão real)
+- Lore deve ser revelado gradualmente, nunca all-at-once (cria mistério)
+- Cada evento deve ter visual único e sound design (reforça identidade)
+- localStorage é chave: Fazer backup é crítico (avisar player sobre cache clear)
+- Testes devem incluir: runs longas, múltiplos eventos simultâneos, edge cases de timing
