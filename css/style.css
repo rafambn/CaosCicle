@@ -84,6 +84,65 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+/* Game Container Styles */
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #000;
+  font-family: Arial, sans-serif;
+}
+
+#game-container {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  position: relative;
+}
+
+#game-container canvas {
+  display: block;
+  border: 1px solid #333;
+  pointer-events: auto;
+  touch-action: manipulation; /* improves click responsiveness on mobile/devtools */
+}
+
+/* Mobile Responsive Styles */
+@media only screen and (max-width: 768px) {
+  body {
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  #game-container {
+    width: 100vw;
+    max-width: none;
+    /* Let Phaser Scale handle canvas sizing; avoid forcing 100vh to prevent overlay issues in DevTools */
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #game-container canvas {
+    border: none;
+  }
+}
+
+/* Touch optimization for mobile */
+@media (hover: none) and (pointer: coarse) {
+  body {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */
