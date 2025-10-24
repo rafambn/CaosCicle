@@ -16,52 +16,116 @@ class UIScene extends Phaser.Scene {
     const isMobile = gameWidth < 768;
     
     // Painel de Game Over (responsive)
-    const panelWidth = isMobile ? gameWidth - 40 : 400;
-    const panelHeight = isMobile ? 250 : 300;
+    const panelWidth = isMobile ? gameWidth - 40 : 450;
+    const panelHeight = isMobile ? 380 : 420;
     
-    this.gameOverPanel = this.add.container(gameWidth / 2, gameHeight / 2).setVisible(false);
-    const background = this.add.graphics().fillStyle(0x111111, 0.9).fillRect(
+    this.gameOverPanel = this.add.container(gameWidth / 2, gameHeight / 2).setDepth(10).setVisible(false);
+    
+    const background = this.add.graphics().fillStyle(0x111111, 0.95).fillRect(
       -panelWidth / 2, -panelHeight / 2, panelWidth, panelHeight
     );
     
-    const title = this.add.text(0, -panelHeight / 2 + 40, i18n.get('gameOver.title'), {
-      fontSize: isMobile ? '20px' : '28px'
+    const title = this.add.text(0, -panelHeight / 2 + 30, i18n.get('gameOver.title'), {
+      fontSize: isMobile ? '22px' : '28px',
+      fill: '#ff4444'
+    }).setOrigin(0.5);
+
+    const narrativeText = this.add.text(0, -panelHeight / 2 + 70, i18n.get('gameOver.narrative'), {
+      fontSize: isMobile ? '14px' : '16px',
+      fill: '#cccccc',
+      align: 'center',
+      wordWrap: { width: panelWidth - 40 }
     }).setOrigin(0.5);
     
-    this.timeSurvivedText = this.add.text(0, -30, '', { 
-      fontSize: isMobile ? '14px' : '18px' 
+    // Stats section
+    const statsY = -panelHeight / 2 + 130;
+    this.timeSurvivedText = this.add.text(0, statsY, '', { 
+      fontSize: isMobile ? '16px' : '18px' 
     }).setOrigin(0.5);
     
-    this.boostGainedText = this.add.text(0, 0, '', { 
-      fontSize: isMobile ? '14px' : '18px' 
+    this.boostGainedText = this.add.text(0, statsY + 30, '', { 
+      fontSize: isMobile ? '16px' : '18px' 
     }).setOrigin(0.5);
     
-    const restartButton = this.add.rectangle(0, panelHeight / 2 - 40, 
-      isMobile ? 120 : 150, 
-      isMobile ? 40 : 50, 
+    this.totalBoostText = this.add.text(0, statsY + 60, '', { 
+      fontSize: isMobile ? '16px' : '18px' 
+    }).setOrigin(0.5);
+
+    // Lore section
+    this.loreTitleText = this.add.text(0, statsY + 110, `--- ${i18n.get('lore.unlocked')} ---`, {
+      fontSize: isMobile ? '15px' : '17px',
+      fill: '#00ffff'
+    }).setOrigin(0.5).setVisible(false);
+
+    this.loreContentText = this.add.text(0, statsY + 140, '', {
+      fontSize: isMobile ? '14px' : '16px',
+      fill: '#dddddd',
+      align: 'center',
+      wordWrap: { width: panelWidth - 60 },
+      fontStyle: 'italic'
+    }).setOrigin(0.5).setVisible(false);
+
+    const restartButton = this.add.rectangle(0, panelHeight / 2 - 50, 
+      isMobile ? 180 : 220, 
+      isMobile ? 50 : 60, 
       0x00ff00
     ).setInteractive();
     
-    const restartText = this.add.text(0, panelHeight / 2 - 40, i18n.get('buttons.witnessNextCycle'), {
+    const restartText = this.add.text(0, panelHeight / 2 - 50, i18n.get('buttons.witnessNextCycle'), {
       fill: '#000',
-      fontSize: isMobile ? '14px' : '16px'
+      fontSize: isMobile ? '16px' : '18px'
     }).setOrigin(0.5);
 
-    this.gameOverPanel.add([background, title, this.timeSurvivedText, this.boostGainedText, restartButton, restartText]);
+    this.gameOverPanel.add([
+      background, title, narrativeText, 
+      this.timeSurvivedText, this.boostGainedText, this.totalBoostText,
+      this.loreTitleText, this.loreContentText,
+      restartButton, restartText
+    ]);
 
     restartButton.on('pointerdown', () => {
       this.gameOverPanel.setVisible(false);
-      // Reinicia a cena principal, passando o novo bônus acumulado
       mainScene.scene.restart({ balanceBoost: this.nextBoost });
     });
 
     // Listen for game over event
     mainScene.events.on('gameOver', (stats) => {
-      this.timeSurvivedText.setText(`${i18n.get('gameOver.timeSurvived')}: ${stats.timeSurvived.toFixed(2)}s`);
+      // Hide lore texts initially
+      this.loreTitleText.setVisible(false);
+      this.loreContentText.setVisible(false);
+      
+      this.timeSurvivedText.setText(`${i18n.get('gameOver.timeSurvived')}: ${this.formatTime(stats.timeSurvived)}`);
       this.boostGainedText.setText(`${i18n.get('gameOver.aeonFragmentsGained')}: +${stats.boostGained.toFixed(4)}`);
-      this.nextBoost = stats.newTotalBoost; // Stores the new total boost
+      this.totalBoostText.setText(`${i18n.get('gameOver.totalAeonFragments')}: ${stats.newTotalBoost.toFixed(4)}`);
+      
+      this.nextBoost = stats.newTotalBoost;
+
+      // Lore unlock logic
+      const previousBoost = stats.newTotalBoost - stats.boostGained;
+      const milestones = [10, 20, 30]; // From TODO
+      let unlockedLore = null;
+
+      for (const milestone of milestones) {
+        if (previousBoost < milestone && stats.newTotalBoost >= milestone) {
+          unlockedLore = i18n.get(`lore.fragments.${milestone}`);
+          break; 
+        }
+      }
+
+      if (unlockedLore) {
+        this.loreTitleText.setVisible(true);
+        this.loreContentText.setText(`"${unlockedLore}"`).setVisible(true);
+      }
+
       this.gameOverPanel.setVisible(true);
     });
+  }
+
+  formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+    const paddedSeconds = remainingSeconds.toString().padStart(2, '0');
+    return `${minutes}:${paddedSeconds}`;
   }
 }
 
@@ -142,10 +206,11 @@ class MainScene extends Phaser.Scene {
       fill: '#00ffff'
     }).setOrigin(0.5, 0);
     
-    this.imbalanceTimerText = this.add.text(gameWidth / 2, gameHeight - 100, '', { 
-      fontSize: isMobile ? '16px' : '18px', 
-      fill: '#ff0000' 
-    }).setOrigin(0.5).setVisible(false);
+    this.imbalanceTimerText = this.add.text(gameWidth / 2, gameHeight - 120, '', { 
+      fontSize: isMobile ? '18px' : '22px', 
+      fill: '#ff0000',
+      fontStyle: 'bold'
+    }).setOrigin(0.5).setDepth(5).setVisible(false);
 
     // --- Botões de Geração Manual (Touch-optimized) ---
     const buttonWidth = isMobile ? 140 : 180;
@@ -261,6 +326,11 @@ class MainScene extends Phaser.Scene {
     this.balanceBarBackground = this.add.graphics();
     this.balanceBarBackground.fillStyle(0x555555, 1);
     this.balanceBarBackground.fillRect(balanceBarX, balanceBarY, balanceBarWidth, balanceBarHeight);
+
+    // Efeito de flash para desequilíbrio
+    this.imbalanceFlash = this.add.graphics({ fillStyle: { color: 0xff0000 } });
+    this.imbalanceFlash.fillRect(balanceBarX, balanceBarY, balanceBarWidth, balanceBarHeight);
+    this.imbalanceFlash.setAlpha(0);
     
     // Linha central para referência
     const centerX = gameWidth / 2;
@@ -369,12 +439,30 @@ class MainScene extends Phaser.Scene {
       this.imbalanceTimerText.setText(`${i18n.get('collapse')}: ${((10000 - this.imbalanceTimer) / 1000).toFixed(1)}s`);
       this.imbalanceTimerText.setVisible(true);
 
+      // Start flash tween if it's not already running
+      if (!this.imbalanceFlashTween) {
+        this.imbalanceFlashTween = this.tweens.add({
+          targets: this.imbalanceFlash,
+          alpha: 0.4,
+          duration: 250,
+          ease: 'Cubic.easeInOut',
+          yoyo: true,
+          repeat: -1
+        });
+      }
+
       if (this.imbalanceTimer >= 10000) {
         this.isGameOver = true; // Set game over flag
         const boostGained = this.timeSurvived / 100;
         const newTotalBoost = this.balanceBoost + boostGained;
 
         this.saveResetState(newTotalBoost); // Save reset state immediately
+
+        // Stop the flash effect
+        if (this.imbalanceFlashTween) {
+          this.imbalanceFlashTween.stop();
+          this.imbalanceFlash.setAlpha(0);
+        }
 
         this.scene.pause();
         this.events.emit('gameOver', {
@@ -386,6 +474,13 @@ class MainScene extends Phaser.Scene {
     } else {
       this.imbalanceTimer = 0;
       this.imbalanceTimerText.setVisible(false);
+
+      // Stop flash tween if it exists
+      if (this.imbalanceFlashTween) {
+        this.imbalanceFlashTween.stop();
+        this.imbalanceFlashTween = null;
+        this.imbalanceFlash.setAlpha(0);
+      }
     }
   }
 }

@@ -34,8 +34,20 @@ const i18n = {
       // Textos de Game Over
       gameOver: {
         title: 'The Gears Have Shattered',
+        narrative: 'Time fractures. Resetting to the last stable moment... but something remains. Memory persists.',
         timeSurvived: 'Time Survived',
         aeonFragmentsGained: 'Aeon Fragments Gained',
+        totalAeonFragments: 'Total Aeon Fragments',
+      },
+
+      // Textos de Lore
+      lore: {
+        unlocked: 'Memory Fragment Unlocked',
+        fragments: {
+          10: "Who am I? Why do I remember the last cycle?",
+          20: "This clock... it's been running for eons.",
+          30: "I sense two factions. The Accelerators. The Architects.",
+        }
       },
 
       // Texto de Colapso (countdown)
@@ -71,8 +83,20 @@ const i18n = {
       // Textos de Game Over
       gameOver: {
         title: 'As Engrenagens se Quebraram',
+        narrative: 'O tempo fratura. Reiniciando para o último momento estável... mas algo permanece. A memória persiste.',
         timeSurvived: 'Tempo Sobrevivido',
         aeonFragmentsGained: 'Fragmentos de Éon Ganhos',
+        totalAeonFragments: 'Total de Fragmentos de Éon',
+      },
+      
+      // Textos de Lore
+      lore: {
+        unlocked: 'Fragmento de Memória Desbloqueado',
+        fragments: {
+          10: "Quem sou eu? Por que me lembro do último ciclo?",
+          20: "Este relógio... está funcionando há eras.",
+          30: "Eu sinto duas facções. Os Aceleradores. Os Arquitetos.",
+        }
       },
 
       // Texto de Colapso (countdown)

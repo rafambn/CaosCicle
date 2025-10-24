@@ -35,16 +35,16 @@ FASE 0: FUNDAÇÃO NARRATIVA (Essencial para MVP)
 - Preparado para adicionar novos idiomas futuramente
 - localStorage ainda usa variáveis internas (creatorEssence, chaoticEssence, etc)
 
-## 0.2 Game Over e Reset Narrativo
-- [ ] Atualizar texto de Game Over (decorativo):
+## 0.2 Game Over e Reset Narrativo ✅ CONCLUÍDO
+- [x] Atualizar texto de Game Over (decorativo):
   *"The gears have shattered. Time fractures. Resetting to last stable moment... but something remains. Memory persists."*
-- [ ] Implementar fade-in gradual de "Phase Deviation" antes de crashear (visual drama)
-- [ ] Painel de Game Over mostra:
+- [x] Implementar fade-in gradual de "Phase Deviation" antes de crashear (visual drama)
+- [x] Painel de Game Over mostra:
   - Tempo Sobrevivido (em segundos legíveis ou minutos)
   - Aeon Fragments Ganhos nesta run
   - Total Cumulativo de Aeon Fragments
   - Fragmento de lore desbloqueado (se milestone atingido)
-- [ ] Adicionar botão "Witness the Next Cycle" em vez de "Play Again"
+- [x] Adicionar botão "Witness the Next Cycle" em vez de "Play Again"
 
 ## 0.3 Flavor Text Base (CRIAÇÃO - Ordem)
 - [ ] "Mainspring Stabilizers":
