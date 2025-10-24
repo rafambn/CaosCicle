@@ -1,0 +1,98 @@
+# TODO - Funcionalidades Restantes do Ciclo do Caos
+# (Baseado no GDD completo, após conclusão do MVP)
+
+## 1. Eventos Dinâmicos
+- [ ] Implementar sistema de eventos aleatórios baseados em equilíbrio
+- [ ] Cooldown de 30s-1min entre eventos
+- [ ] Estagnação Cósmica: (>50% Criação) Produção -20% por 2min
+- [ ] Colapso Universal: (>50% Destruição) Acelera perda, mas +boost se sobreviver
+- [ ] Renovação do Ciclo: (<20% desequilíbrio) x1.5 produção por 1min
+- [ ] Ecos do Passado: Recupera 5% recursos (evento raro)
+- [ ] Cicatrizes do Caos: Debuff temporário, removível com ads
+- [ ] Anomalia Dimensional: Inverte essências por 30s
+
+## 2. Sistema de Boosts Permanentes Expandido
+- [ ] Implementar compra de habilidades com boosts acumulados
+- [ ] Equilíbrio Instintivo: +5% faixa segura (Custa 10 Boost)
+- [ ] Caos Controlado: -10% penalidades (Custa 20 Boost)
+- [ ] Criação Corrompida: Auto-conversão 2% (Custa 30 Boost)
+- [ ] Meta-progresso: Desbloquear modos hardcore após runs longas
+- [ ] UI para loja de boosts permanentes
+
+## 3. Estruturas Completas (5 Tiers)
+
+### Criação (Ordem):
+- [ ] Tier 2: Artesãos Estelares - +5% eficiência (Custo: 50 Caótica)
+- [ ] Tier 3: Arquitetos da Ordem - Automação básica (Custo: 200 Caótica)
+- [ ] Tier 4: Mundos Harmônicos - +5% estabilidade (Custo: 1000 Caótica)
+- [ ] Tier 5: Bibliotecas da Eternidade - +10% boost em resets (Custo: 5000 Caótica)
+
+### Destruição (Caos):
+- [ ] Tier 2: Devastadores - +5% eventos benéficos (Custo: 50 Criadora)
+- [ ] Tier 3: Fendas Entópicas - Acelera riscos para runs agressivas (Custo: 200 Criadora)
+- [ ] Tier 4: Colapsos Singulares - +20% boost em perda (Custo: 1000 Criadora)
+- [ ] Tier 5: Devoradores do Tempo - Reduz tempo idle (Custo: 5000 Criadora)
+
+## 4. Monetização com Ads
+- [ ] Integrar Google AdSense para banners
+- [ ] Implementar vídeos recompensados (AdMob ou ironSource web)
+- [ ] Assistir vídeo para x2 produção por 5min
+- [ ] Assistir vídeo para reset parcial de desequilíbrio
+- [ ] Dobrar ganhos offline com vídeo
+- [ ] Ads non-intrusivas, testadas cross-browser
+
+## 5. Energia Primordial
+- [ ] Implementar novo recurso neutro
+- [ ] Geração por equilíbrio perfeito (<5% desequilíbrio)
+- [ ] Sistema de boosts raros comprados com Energia Primordial
+- [ ] UI para exibir Energia Primordial
+- [ ] Salvar Energia Primordial no localStorage
+
+## 6. Progressão Offline Melhorada
+- [ ] Implementar 50% da produção enquanto aba fechada
+- [ ] Melhorar cálculo de tempo offline com Date.now()
+- [ ] Boost de vídeo dobra ganhos offline
+- [ ] Pop-up de "Bem-vindo de volta" com resumo offline
+- [ ] Limitação de tempo offline máximo (ex: 24h)
+
+## 7. Elementos Visuais e UX
+- [ ] Implementar partículas CSS para feedback visual
+- [ ] Sistema de áudio adaptativo (Web Audio API)
+- [ ] Sons leves para cliques e eventos
+- [ ] Botão de mute para mobile
+- [ ] Melhorar layout responsivo mobile (vertical)
+- [ ] Animações CSS para transições
+- [ ] High contrast mode
+- [ ] ARIA labels para screen readers
+
+## 8. Tom Narrativo e Lore
+- [ ] Pop-ups poéticos durante eventos ("O equilíbrio treme... segure o ciclo!")
+- [ ] Sistema de tooltips com lore
+- [ ] Textos narrativos para cada estrutura
+- [ ] Descrições filosóficas dos eventos
+- [ ] Easter eggs temáticos sobre yin-yang e caos primordial
+
+## 9. Polimento e Otimização
+- [ ] Otimizar performance para sessões longas
+- [ ] Implementar debug mode para balanceamento
+- [ ] Sistema de estatísticas detalhadas
+- [ ] Achievements/conquistas locais
+- [ ] Exportar/importar save
+- [ ] Backup automático no localStorage
+- [ ] Avisos sobre limpeza de cache do navegador
+
+## 10. Expansões Futuras (Opcional)
+- [ ] Civilizações: NPCs reativos ao equilíbrio
+- [ ] Ritmos Dimensionais: Modos assíncronos
+- [ ] Multiversal: Universos paralelos
+- [ ] Seasonal events
+- [ ] Leaderboards locais
+- [ ] Modo cooperativo (se implementar backend futuramente)
+
+## 11. Testes e Deploy
+- [ ] Testes extensivos em mobile (Chrome DevTools)
+- [ ] Testes cross-browser (Chrome, Firefox, Safari)
+- [ ] Testes de performance com runs longas
+- [ ] Balanceamento de fórmulas para não-frustração
+- [ ] Deploy em produção (GitHub Pages/Netlify)
+- [ ] Analytics básicas de uso

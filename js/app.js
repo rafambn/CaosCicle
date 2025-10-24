@@ -8,15 +8,43 @@ class UIScene extends Phaser.Scene {
 
   create() {
     const mainScene = this.scene.get('MainScene');
-
-    // Painel de Game Over (inicialmente invisível)
-    this.gameOverPanel = this.add.container(400, 300).setVisible(false);
-    const background = this.add.graphics().fillStyle(0x111111, 0.9).fillRect(-200, -150, 400, 300);
-    const title = this.add.text(0, -100, 'O Ciclo se Reinicia', { fontSize: '28px' }).setOrigin(0.5);
-    this.timeSurvivedText = this.add.text(0, -40, '', { fontSize: '18px' }).setOrigin(0.5);
-    this.boostGainedText = this.add.text(0, -10, '', { fontSize: '18px' }).setOrigin(0.5);
-    const restartButton = this.add.rectangle(0, 80, 150, 50, 0x00ff00).setInteractive();
-    const restartText = this.add.text(0, 80, 'Recomeçar', { fill: '#000' }).setOrigin(0.5);
+    
+    // Get game dimensions for responsive layout
+    const gameWidth = this.sys.game.config.width;
+    const gameHeight = this.sys.game.config.height;
+    const isMobile = gameWidth < 768;
+    
+    // Painel de Game Over (responsive)
+    const panelWidth = isMobile ? gameWidth - 40 : 400;
+    const panelHeight = isMobile ? 250 : 300;
+    
+    this.gameOverPanel = this.add.container(gameWidth / 2, gameHeight / 2).setVisible(false);
+    const background = this.add.graphics().fillStyle(0x111111, 0.9).fillRect(
+      -panelWidth / 2, -panelHeight / 2, panelWidth, panelHeight
+    );
+    
+    const title = this.add.text(0, -panelHeight / 2 + 40, 'O Ciclo se Reinicia', { 
+      fontSize: isMobile ? '20px' : '28px' 
+    }).setOrigin(0.5);
+    
+    this.timeSurvivedText = this.add.text(0, -30, '', { 
+      fontSize: isMobile ? '14px' : '18px' 
+    }).setOrigin(0.5);
+    
+    this.boostGainedText = this.add.text(0, 0, '', { 
+      fontSize: isMobile ? '14px' : '18px' 
+    }).setOrigin(0.5);
+    
+    const restartButton = this.add.rectangle(0, panelHeight / 2 - 40, 
+      isMobile ? 120 : 150, 
+      isMobile ? 40 : 50, 
+      0x00ff00
+    ).setInteractive();
+    
+    const restartText = this.add.text(0, panelHeight / 2 - 40, 'Recomeçar', { 
+      fill: '#000',
+      fontSize: isMobile ? '14px' : '16px'
+    }).setOrigin(0.5);
 
     this.gameOverPanel.add([background, title, this.timeSurvivedText, this.boostGainedText, restartButton, restartText]);
 
@@ -88,26 +116,101 @@ class MainScene extends Phaser.Scene {
     }
     this.scene.launch('UIScene');
 
-    // --- UI de Recursos ---
-    this.creatorEssenceText = this.add.text(50, 30, 'Criação: 0', { fontSize: '20px', fill: '#fff' });
-    this.chaoticEssenceText = this.add.text(650, 30, 'Caos: 0', { fontSize: '20px', fill: '#fff' });
-    this.boostText = this.add.text(300, 30, `Bônus: ${this.balanceBoost.toFixed(4)}%`, { fontSize: '16px', fill: '#00ffff' });
-    this.imbalanceTimerText = this.add.text(400, 470, '', { fontSize: '18px', fill: '#ff0000' }).setOrigin(0.5).setVisible(false);
+    // Get game dimensions for responsive layout
+    const gameWidth = this.sys.game.config.width;
+    const gameHeight = this.sys.game.config.height;
+    const isMobile = gameWidth < 768;
+    const scale = isMobile ? 0.8 : 1;
+    
+    // --- UI de Recursos (Responsive) ---
+    const textSize = isMobile ? '16px' : '20px';
+    const smallTextSize = isMobile ? '14px' : '16px';
+    
+    this.creatorEssenceText = this.add.text(20, 20, 'Criação: 0', { 
+      fontSize: textSize, 
+      fill: '#fff' 
+    });
+    
+    this.chaoticEssenceText = this.add.text(gameWidth - 20, 20, 'Caos: 0', { 
+      fontSize: textSize, 
+      fill: '#fff' 
+    }).setOrigin(1, 0);
+    
+    this.boostText = this.add.text(gameWidth / 2, 20, `Bônus: ${this.balanceBoost.toFixed(4)}%`, { 
+      fontSize: smallTextSize, 
+      fill: '#00ffff' 
+    }).setOrigin(0.5, 0);
+    
+    this.imbalanceTimerText = this.add.text(gameWidth / 2, gameHeight - 100, '', { 
+      fontSize: isMobile ? '16px' : '18px', 
+      fill: '#ff0000' 
+    }).setOrigin(0.5).setVisible(false);
 
-    // --- Botões de Geração Manual ---
-    const creatorButton = this.add.rectangle(150, 100, 180, 60, 0x00ff00).setInteractive();
-    this.add.text(150, 100, 'Gerar Criação', { fill: '#000' }).setOrigin(0.5);
+    // --- Botões de Geração Manual (Touch-optimized) ---
+    const buttonWidth = isMobile ? 140 : 180;
+    const buttonHeight = isMobile ? 50 : 60;
+    const buttonY = isMobile ? 80 : 100;
+    
+    const creatorButton = this.add.rectangle(
+      gameWidth * 0.25, 
+      buttonY, 
+      buttonWidth, 
+      buttonHeight, 
+      0x00ff00
+    ).setInteractive();
+    
+    this.add.text(gameWidth * 0.25, buttonY, 'Gerar Criação', { 
+      fill: '#000',
+      fontSize: isMobile ? '14px' : '16px'
+    }).setOrigin(0.5);
+    
     creatorButton.on('pointerdown', () => { this.creatorEssence++; });
 
-    const chaoticButton = this.add.rectangle(650, 100, 180, 60, 0xff0000).setInteractive();
-    this.add.text(650, 100, 'Gerar Caos', { fill: '#000' }).setOrigin(0.5);
+    const chaoticButton = this.add.rectangle(
+      gameWidth * 0.75, 
+      buttonY, 
+      buttonWidth, 
+      buttonHeight, 
+      0xff0000
+    ).setInteractive();
+    
+    this.add.text(gameWidth * 0.75, buttonY, 'Gerar Caos', { 
+      fill: '#000',
+      fontSize: isMobile ? '14px' : '16px'
+    }).setOrigin(0.5);
+    
     chaoticButton.on('pointerdown', () => { this.chaoticEssence++; });
 
-    // --- UI e Lógica das Estruturas ---
-    this.creatorStructureLevelText = this.add.text(50, 200, 'Sementes: 0', { fill: '#fff' });
-    this.creatorStructureCostText = this.add.text(50, 220, 'Custo: 10 Caos', { fill: '#fff' });
-    const buyCreatorStructureBtn = this.add.rectangle(150, 280, 180, 50, 0x00dd00).setInteractive();
-    this.add.text(150, 280, 'Comprar Semente', { fill: '#000' }).setOrigin(0.5);
+    // --- UI e Lógica das Estruturas (Responsive) ---
+    const structureY = isMobile ? 140 : 200;
+    const structureTextY = isMobile ? 140 : 200;
+    const structureCostY = isMobile ? 160 : 220;
+    const structureButtonY = isMobile ? 200 : 280;
+    
+    // Creator Structures (Left side)
+    this.creatorStructureLevelText = this.add.text(20, structureTextY, 'Sementes: 0', { 
+      fill: '#fff',
+      fontSize: isMobile ? '14px' : '16px'
+    });
+    
+    this.creatorStructureCostText = this.add.text(20, structureCostY, 'Custo: 10 Caos', { 
+      fill: '#fff',
+      fontSize: isMobile ? '12px' : '14px'
+    });
+    
+    const buyCreatorStructureBtn = this.add.rectangle(
+      gameWidth * 0.25, 
+      structureButtonY, 
+      buttonWidth, 
+      buttonHeight - 10, 
+      0x00dd00
+    ).setInteractive();
+    
+    this.add.text(gameWidth * 0.25, structureButtonY, 'Comprar Semente', { 
+      fill: '#000',
+      fontSize: isMobile ? '12px' : '14px'
+    }).setOrigin(0.5);
+    
     buyCreatorStructureBtn.on('pointerdown', () => {
       const cost = this.getStructureCost('creator');
       if (this.chaoticEssence >= cost) {
@@ -116,10 +219,30 @@ class MainScene extends Phaser.Scene {
       }
     });
 
-    this.chaoticStructureLevelText = this.add.text(550, 200, 'Fragmentos: 0', { fill: '#fff' });
-    this.chaoticStructureCostText = this.add.text(550, 220, 'Custo: 10 Criação', { fill: '#fff' });
-    const buyChaoticStructureBtn = this.add.rectangle(650, 280, 180, 50, 0xdd0000).setInteractive();
-    this.add.text(650, 280, 'Comprar Fragmento', { fill: '#000' }).setOrigin(0.5);
+    // Chaotic Structures (Right side)
+    this.chaoticStructureLevelText = this.add.text(gameWidth - 20, structureTextY, 'Fragmentos: 0', { 
+      fill: '#fff',
+      fontSize: isMobile ? '14px' : '16px'
+    }).setOrigin(1, 0);
+    
+    this.chaoticStructureCostText = this.add.text(gameWidth - 20, structureCostY, 'Custo: 10 Criação', { 
+      fill: '#fff',
+      fontSize: isMobile ? '12px' : '14px'
+    }).setOrigin(1, 0);
+    
+    const buyChaoticStructureBtn = this.add.rectangle(
+      gameWidth * 0.75, 
+      structureButtonY, 
+      buttonWidth, 
+      buttonHeight - 10, 
+      0xdd0000
+    ).setInteractive();
+    
+    this.add.text(gameWidth * 0.75, structureButtonY, 'Comprar Fragmento', { 
+      fill: '#000',
+      fontSize: isMobile ? '12px' : '14px'
+    }).setOrigin(0.5);
+    
     buyChaoticStructureBtn.on('pointerdown', () => {
       const cost = this.getStructureCost('chaotic');
       if (this.creatorEssence >= cost) {
@@ -128,14 +251,29 @@ class MainScene extends Phaser.Scene {
       }
     });
 
-    // --- Barra de Equilíbrio ---
+    // --- Barra de Equilíbrio (Responsive) ---
+    const balanceBarY = gameHeight - 80;
+    const balanceBarWidth = gameWidth - 40;
+    const balanceBarHeight = isMobile ? 40 : 50;
+    const balanceBarX = 20;
+    
     this.balanceBarBackground = this.add.graphics();
     this.balanceBarBackground.fillStyle(0x555555, 1);
-    this.balanceBarBackground.fillRect(150, 500, 500, 50);
+    this.balanceBarBackground.fillRect(balanceBarX, balanceBarY, balanceBarWidth, balanceBarHeight);
+    
     // Linha central para referência
-    this.add.graphics().fillStyle(0xffffff, 0.5).fillRect(398, 500, 4, 50);
+    const centerX = gameWidth / 2;
+    this.add.graphics().fillStyle(0xffffff, 0.5).fillRect(centerX - 2, balanceBarY, 4, balanceBarHeight);
+    
     // Marcador do equilíbrio
-    this.balanceMarker = this.add.rectangle(400, 525, 10, 40, 0xffff00);
+    this.balanceMarker = this.add.rectangle(centerX, balanceBarY + balanceBarHeight / 2, 10, balanceBarHeight - 10, 0xffff00);
+    
+    // Store balance bar properties for update method
+    this.balanceBarProps = {
+      centerX: centerX,
+      width: balanceBarWidth,
+      y: balanceBarY + balanceBarHeight / 2
+    };
 
     // --- Salvamento Automático e ao Sair ---
     this.time.addEvent({
@@ -219,10 +357,9 @@ class MainScene extends Phaser.Scene {
       balance = (this.creatorEssence - this.chaoticEssence) / totalEssence;
     }
 
-    // Atualiza a posição do marcador
-    const barCenter = 400;
-    const barWidth = 500;
-    this.balanceMarker.x = barCenter + (balance * (barWidth / 2));
+    // Atualiza a posição do marcador (responsive)
+    this.balanceMarker.x = this.balanceBarProps.centerX + (balance * (this.balanceBarProps.width / 2));
+    this.balanceMarker.y = this.balanceBarProps.y;
 
     // Nova lógica de fim de jogo com temporizador
     const currentImbalanceLimit = this.imbalanceLimit - (this.balanceBoost / 100);
@@ -252,12 +389,40 @@ class MainScene extends Phaser.Scene {
   }
 }
 
-const config = {
-  type: Phaser.AUTO,
-  width: 800,
-  height: 600,
-  parent: 'game-container',
-  scene: [MainScene, UIScene] // Adiciona a nova cena
-};
+// Responsive game configuration
+function getGameConfig() {
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+  
+  let gameWidth = 800;
+  let gameHeight = 600;
+  
+  if (isMobile || screenWidth < 768) {
+    gameWidth = Math.min(screenWidth, 800);
+    gameHeight = Math.min(screenHeight, 600);
+  }
+  
+  return {
+    type: Phaser.AUTO,
+    width: gameWidth,
+    height: gameHeight,
+    parent: 'game-container',
+    backgroundColor: '#000000',
+    scale: {
+      mode: Phaser.Scale.FIT,
+      autoCenter: Phaser.Scale.CENTER_BOTH,
+      width: gameWidth,
+      height: gameHeight
+    },
+    scene: [MainScene, UIScene],
+    input: {
+      activePointers: 3 // Support for multi-touch
+    }
+  };
+}
+
+const config = getGameConfig();
 
 const game = new Phaser.Game(config);
+
