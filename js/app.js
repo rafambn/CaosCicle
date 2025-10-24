@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import i18n from './i18n';
+import Debug from './debug';
 
 // UI Scene (including Game Over screen)
 class UIScene extends Phaser.Scene {
@@ -172,6 +173,14 @@ class MainScene extends Phaser.Scene {
     this.imbalanceTimer = 0; // Temporizador para a condição de perda
     this.imbalanceLimit = 0.8; // 80% de desequilíbrio para perder
     this.isGameOver = false; // Flag para controlar o estado de fim de jogo
+
+    // Variáveis do Sistema de Eventos
+    this.activeEvents = [];
+    this.eventCooldown = 10000; // Cooldown inicial de 10s antes do primeiro evento
+    this.productionModifiers = {
+      creator: 1.0,
+      chaotic: 1.0,
+    };
   }
 
   create() {
@@ -211,6 +220,43 @@ class MainScene extends Phaser.Scene {
       fill: '#ff0000',
       fontStyle: 'bold'
     }).setOrigin(0.5).setDepth(5).setVisible(false);
+
+    this.eventText = this.add.text(gameWidth / 2, 50, 'No Active Event', {
+        fontSize: smallTextSize,
+        fill: '#ffff00',
+        align: 'center'
+    }).setOrigin(0.5, 0);
+
+    // --- Sistema de Eventos (Definição) ---
+    this.eventsData = [
+      {
+        id: 'frozenGear',
+        type: 'ORDER',
+        name: 'The Frozen Gear',
+        triggerCondition: (balance) => balance > 0.6,
+        duration: 90000, // 90s
+        start: () => {
+          this.productionModifiers.chaotic *= 0.75; // -25%
+        },
+        end: () => {
+          this.productionModifiers.chaotic /= 0.75; // Reverte o efeito
+        }
+      },
+      {
+        id: 'paradoxCascade',
+        type: 'CHAOS',
+        name: 'Paradox Cascade',
+        triggerCondition: (balance) => balance < -0.6,
+        duration: 60000, // O efeito no risco dura 60s
+        start: () => {
+          this.chaoticEssence *= 1.40; // +40% instantâneo
+          this.imbalanceLimit *= 0.85; // Risco aumenta em 15%
+        },
+        end: () => {
+          this.imbalanceLimit /= 0.85; // Reverte o risco
+        }
+      }
+    ];
 
     // --- Botões de Geração Manual (Touch-optimized) ---
     const buttonWidth = isMobile ? 140 : 180;
@@ -378,6 +424,11 @@ class MainScene extends Phaser.Scene {
         this.saveGame();
       }
     });
+
+    // --- Debug Tools ---
+    if (process.env.NODE_ENV !== 'production') {
+      window.dev = new Debug(this);
+    }
   }
 
   saveGame() {
@@ -428,9 +479,14 @@ class MainScene extends Phaser.Scene {
 
     this.timeSurvived += delta / 1000; // in seconds
 
-    // --- Passive Generation ---
-    this.creatorEssence += (this.creatorStructures * 1) * (delta / 1000);
-    this.chaoticEssence += (this.chaoticStructures * 1) * (delta / 1000);
+    // --- Event System Update ---
+    const balance = this.updateBalance();
+    this.updateActiveEvents(delta);
+    this.handleEventTriggering(delta, balance);
+
+    // --- Passive Generation (com modificadores de evento) ---
+    this.creatorEssence += (this.creatorStructures * 1 * this.productionModifiers.creator) * (delta / 1000);
+    this.chaoticEssence += (this.chaoticStructures * 1 * this.productionModifiers.chaotic) * (delta / 1000);
 
     // --- Update UI ---
     this.creatorEssenceText.setText(`${i18n.get('resources.chronoEssence')}: ${Math.floor(this.creatorEssence)}`);
@@ -440,7 +496,11 @@ class MainScene extends Phaser.Scene {
     this.chaoticStructureLevelText.setText(`${i18n.get('structures.quantumLubricantInjectors.name')}: ${this.chaoticStructures}`);
     this.chaoticStructureCostText.setText(`${i18n.get('cost')}: ${this.getStructureCost('chaotic')} ${i18n.get('resources.chronoEssence')}`);
 
-    // --- Balance and Game Over Logic ---
+    // --- Game Over Logic ---
+    this.updateGameOver(delta, balance);
+  }
+
+  updateBalance() {
     const totalEssence = this.creatorEssence + this.chaoticEssence;
     let balance = 0; // from -1 (Total Chaos) to +1 (Total Order)
     if (totalEssence > 0) {
@@ -450,7 +510,64 @@ class MainScene extends Phaser.Scene {
     // Update marker position (responsive)
     this.balanceMarker.x = this.balanceBarProps.centerX + (balance * (this.balanceBarProps.width / 2));
     this.balanceMarker.y = this.balanceBarProps.y;
+    return balance;
+  }
 
+  handleEventTriggering(delta, balance) {
+    this.eventCooldown -= delta;
+
+    if (this.eventCooldown <= 0) {
+      const possibleEvents = this.eventsData.filter(event => {
+        // Evento já está ativo?
+        const isEventActive = this.activeEvents.some(active => active.id === event.id);
+        if (isEventActive) return false;
+
+        // Condição de trigger é satisfeita?
+        return event.triggerCondition(balance);
+      });
+
+      if (possibleEvents.length > 0) {
+        const eventToTrigger = Phaser.Math.RND.pick(possibleEvents);
+        this.triggerEvent(eventToTrigger);
+      }
+
+      // Reseta o cooldown mesmo que nenhum evento seja disparado, para não checar a cada frame
+      this.eventCooldown = Phaser.Math.Between(30000, 60000); // Próxima checagem em 30-60s
+    }
+  }
+
+  triggerEvent(event) {
+    console.log(`Event triggered: ${event.name}`);
+    this.eventText.setText(`Active Event: ${event.name}`);
+
+    if (event.start) {
+      event.start();
+    }
+
+    this.activeEvents.push({ ...event, remaining: event.duration });
+  }
+
+  updateActiveEvents(delta) {
+    for (let i = this.activeEvents.length - 1; i >= 0; i--) {
+      const event = this.activeEvents[i];
+      event.remaining -= delta;
+
+      if (event.remaining <= 0) {
+        console.log(`Event ended: ${event.name}`);
+        if (event.end) {
+          event.end();
+        }
+        this.activeEvents.splice(i, 1);
+
+        // Se não houver mais eventos, limpa o texto
+        if (this.activeEvents.length === 0) {
+          this.eventText.setText('No Active Event');
+        }
+      }
+    }
+  }
+
+  updateGameOver(delta, balance) {
     // Game over logic with timer
     const currentImbalanceLimit = this.imbalanceLimit - (this.balanceBoost / 100);
     if (Math.abs(balance) > currentImbalanceLimit) {

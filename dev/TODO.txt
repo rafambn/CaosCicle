@@ -74,10 +74,10 @@ FASE 0: FUNDAÇÃO NARRATIVA (Essencial para MVP)
 FASE 1: EVENTOS DINÂMICOS TEMÁTICOS
 ================================================================================
 
-## 1.1 Sistema de Eventos (Core Mechanic)
-- [ ] Refatorar sistema de eventos aleatórios para suportar eventos nomeados/narrativos
-- [ ] Implementar cooldown entre eventos: 30s-60s (configurável)
-- [ ] Sistema de trigger baseado em Phase Deviation:
+## 1.1 Sistema de Eventos (Core Mechanic) ✅ CONCLUÍDO
+- [x] Refatorar sistema de eventos aleatórios para suportar eventos nomeados/narrativos
+- [x] Implementar cooldown entre eventos: 30s-60s (configurável)
+- [x] Sistema de trigger baseado em Phase Deviation:
   - Eventos de ORDEM acionados quando Phase Deviation > 60% (favorecendo Chrono-Essence)
   - Eventos de CAOS acionados quando Phase Deviation > 60% (favorecendo Entropy Shards)
   - Eventos NEUTROS independentes (aleatórios)
@@ -384,10 +384,15 @@ FASE 8: ACESSIBILIDADE & QUALIDADE
 FASE 9: DEBUGGING & BALANCEAMENTO
 ================================================================================
 
-## 9.1 Debug Mode
-- [ ] Tecla (ex: `D` key) ativa debug panel
-- [ ] Mostra valores internos: Phase Deviation%, Recursos, Timers de evento
-- [ ] Permite: Trigger eventos manualmente, dar Aeon Fragments, resetar
+## 9.1 Debug Mode ✅ CONCLUÍDO
+- [x] Implementado modo de debug via console do navegador (objeto `window.dev`).
+- [x] Disponível apenas em ambiente de desenvolvimento (`npm start`).
+- [x] Funções implementadas:
+  - `dev.help()`: Lista todos os comandos.
+  - `dev.reset()`: Limpa os dados salvos e reinicia o jogo.
+  - `dev.setResource(nome, valor)`: Define o valor de 'creatorEssence', 'chaoticEssence', 'balanceBoost'.
+  - `dev.listEvents()`: Mostra todos os IDs de eventos que podem ser disparados.
+  - `dev.triggerEvent(id)`: Dispara um evento manualmente.
 
 ## 9.2 Estatísticas Detalhadas
 - [ ] Rastrear: Total de cliques, tempo total jogado, melhor run, eventos mais frequentes
