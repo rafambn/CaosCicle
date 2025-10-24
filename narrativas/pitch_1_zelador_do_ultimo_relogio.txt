@@ -1,0 +1,131 @@
+===========================================
+PITCH 1: O ZELADOR DO ÚLTIMO RELÓGIO
+===========================================
+
+CONCEITO CENTRAL
+-----------------
+Você é o guardião de um relógio cósmico ancestral que mantém a coesão temporal do multiverso.
+Cada tique representa bilhões de realidades sincronizadas. Cada toque representa o nascimento
+e morte de universos inteiros. Seu trabalho: manter os ponteiros em movimento harmônico.
+
+O problema? O tempo não quer ser domado. Entidades do Caos tentam acelerar o relógio, forçando
+o futuro antes de sua hora. Arquitetos da Ordem tentam congelá-lo, aprisionando o presente em
+estase eterna. Ambos causam rachaduras nos ponteiros do relógio - e quando eles quebram, você
+precisa resetar tudo e começar de novo.
+
+
+GANCHO NARRATIVO (Por que isso importa?)
+-----------------------------------------
+• Cada run é uma "turno de manutenção" - você tem tempo limitado antes que o próximo desequilíbrio
+  force uma parada de emergência
+• O relógio não está apenas medindo tempo - ele está CRIANDO tempo
+• Se você falhar permanentemente, o multiverso entra em dessincronização total: passado, presente
+  e futuro colapsam em um único instante eterno
+
+
+CONFLITO PRINCIPAL
+------------------
+• FACÇÃO DO CAOS - "Os Aceleradores"
+  - Querem que o relógio avance exponencialmente
+  - Acreditam que o fim do tempo liberta todas as possibilidades
+  - Enviam "surtos temporais" que aumentam recursos de Caos rapidamente
+
+• FACÇÃO DA ORDEM - "Os Arquitetos Eternos"
+  - Querem cristalizar o momento perfeito
+  - Acreditam que a mudança é corruption
+  - Criam "âncoras temporais" que geram Ordem em excesso
+
+
+MECÂNICAS MAPEADAS
+-------------------
+1. BARRA DE EQUILÍBRIO = "Phase Deviation Meter"
+   - 0% = Relógio congelado (Ordem total)
+   - 50% = Movimento harmônico ideal
+   - 100% = Relógio descontrolado (Caos total)
+
+2. RECURSOS
+   - Criação → "Chrono-Essence" (óleo temporal que lubrifica engrenagens)
+   - Destruição → "Entropy Shards" (fragmentos de futuros que nunca aconteceram)
+
+3. ESTRUTURAS/UPGRADES
+   ORDEM:
+   - "Mainspring Stabilizers" (estabilizadores de mola mestra)
+   - "Gear Calibration Arrays" (matrizes de calibração de engrenagens)
+   - "Temporal Governors" (reguladores temporais)
+
+   CAOS:
+   - "Quantum Lubricant Injectors" (injetores de lubrificante quântico)
+   - "Paradox Coils" (bobinas de paradoxo)
+   - "Possibility Valves" (válvulas de possibilidade)
+
+4. EVENTOS DO JOGO
+   - "A gear has jammed! Chaos surges as friction builds..."
+     (+Destruição, barra vai para Caos)
+   - "An Architect attempts to freeze the pendulum!"
+     (+Criação, barra vai para Ordem)
+   - "A temporal echo from your last shift resonates through the mechanism..."
+     (efeito baseado em como a run anterior terminou)
+   - "The hour hand shudders - reality holds its breath"
+     (evento neutro, momento de tensão)
+
+5. SISTEMA DE PRESTÍGIO = "Horological Mastery"
+   - Cada reset você aprende "repair techniques" ancestrais
+   - Desbloqueia:
+     * "Primordial Oils" (aumenta tolerância da barra de equilíbrio)
+     * "Ancient Blueprints" (upgrades começam mais fortes)
+     * "Time-Worn Wisdom" (vê previsões de eventos futuros)
+   - Moeda de prestígio: "Aeon Fragments" (fragmentos de eras perdidas)
+
+
+PROGRESSÃO A LONGO PRAZO
+-------------------------
+• Descobrir que o relógio tem 12 "mecanismos secretos", um para cada era do multiverso
+• Cada mecanismo desbloqueado revela uma camada mais profunda da história:
+  - Quem construiu o relógio?
+  - Por que VOCÊ foi escolhido como zelador?
+  - O que acontece quando todas as 12 engrenagens estiverem restauradas?
+• Final twist: Você descobre que é um fragmento temporal aprisionado em loop -
+  o "último zelador" foi você mesmo em um ciclo anterior
+
+
+TOM E ESTÉTICA
+--------------
+• ÉPICO-CONTEMPLATIVO: Grandeza cósmica com momentos de silêncio mecânico
+• Visual mental: Steampunk cósmico - bronze, latão, nebulosas refletidas em engrenagens
+• Linguagem: Formal mas não arcaica. "The gears grind" não "Hark, the mechanisms doth protest"
+
+
+ENTREGA NARRATIVA
+-----------------
+• Flavor text em TODOS os upgrades (exemplo: "Mainspring Stabilizer - 'Every second costs eternity'")
+• Tooltips com fragmentos de lore ao passar mouse
+• Sistema de conquistas/marcos com reveals narrativos:
+  - "First Repair" → Fragmento 1/12 da história do relógio
+  - "Survive 100 ticks" → Memória: "You remember... a voice calling your name..."
+• UI: Números do relógio aparecem sutilmente em backgrounds, contagens de recursos
+
+
+CURTO PRAZO (1 sprint)
+-----------------------
+[ ] Renomear resources: "Criação" → "Chrono-Essence", "Destruição" → "Entropy Shards"
+[ ] Renomear barra: "Equilíbrio" → "Phase Deviation"
+[ ] Criar 8-10 eventos temáticos simples (1 linha cada)
+[ ] Adicionar flavor text a 3 estruturas de cada lado (Ordem/Caos)
+[ ] Game over text: "The gears have shattered. Time fractures. Resetting to last stable moment..."
+[ ] Prestígio renamed: "Horological Mastery Level"
+
+
+DIFERENCIAIS
+------------
+✓ Tema de TEMPO permite mecânicas futuras (acelerar/desacelerar gameplay)
+✓ Relógio como metáfora visual forte - fácil de comunicar em UI
+✓ Potencial para expansão musical (ticking, chiming, soundscape temporal)
+✓ Flexibilidade: pode adicionar "fusos horários" (diferentes áreas/biomas de tempo)
+
+
+PERGUNTAS PARA REFINAR
+-----------------------
+• O relógio deve ter "horas" visíveis que avançam durante o jogo?
+• Eventos devem ter timing baseado em "hora do relógio" (ex: sempre às 3h algo acontece)?
+• Quer incluir "rewind" como mecânica avançada (desfazer último minuto de gameplay)?
+• Som de tique-taque deve ser constante ou apenas em momentos-chave?

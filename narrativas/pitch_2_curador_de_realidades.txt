@@ -1,0 +1,201 @@
+===========================================
+PITCH 2: O CURADOR DE REALIDADES
+===========================================
+
+CONCEITO CENTRAL
+-----------------
+Você é o curador-chefe do Museu Interdimensional - uma galeria infinita que cataloga
+realidades através do multiverso. Cada "sala" do museu contém uma exposição: um universo
+inteiro encapsulado, preservado em seu momento mais interessante.
+
+O problema? Realidades são instáveis por natureza. Cada exposição (run) começa vibrante
+mas eventualmente colapsa - ordem demais cristaliza os universos em monotonia, caos demais
+os dissolve em static. Sua missão: curar coleções fascinantes antes que desabem, acumular
+reputação, e desbloquear as alas secretas do museu.
+
+
+GANCHO NARRATIVO (Por que isso importa?)
+-----------------------------------------
+• VOCÊ NÃO PRECISA SEMPRE BUSCAR EQUILÍBRIO - você precisa completar "coleções temáticas"
+• Cada coleção tem requisitos únicos:
+  - "Stable Cosmos Collection": Manter equilíbrio perfeito por 5 minutos
+  - "Fractured Realities Exhibition": Completar run com barra oscilando violentamente
+  - "Edge of Collapse Gallery": Ficar 30+ segundos com a barra em zona crítica SEM colapsar
+  - "Primordial Chaos Wing": Terminar run com 80%+ Caos (mas não 100%)
+  - "Frozen Eternities Hall": Terminar run com 20%- Ordem (mas não 0%)
+
+• Isso muda COMPLETAMENTE o gameplay: às vezes você QUER desbalancear controladamente
+
+
+CONFLITO PRINCIPAL
+------------------
+• PATROCINADORES DA ORDEM - "The Preservation Society"
+  - Doam fundos (Ordem) para manter exposições estáveis
+  - Querem peças "inofensivas" e "educacionais"
+  - Pressionam para censurar realidades "perigosas"
+  - Bonificações: +recursos quando mantém estabilidade
+
+• TRAFICANTES DO CAOS - "The Rogue Collectors"
+  - Organizam leilões clandestinos de realidades raras
+  - Querem peças "explosivas" que atraem multidões
+  - Oferecem subornos para sabotar exposições rivais
+  - Bonificações: +prestígio quando termina runs instáveis
+
+
+MECÂNICAS MAPEADAS
+-------------------
+1. BARRA DE EQUILÍBRIO = "Exhibit Stability Index"
+   - 0% = Universo cristalizado (morto mas "seguro")
+   - 50% = Exposição dinâmica ideal
+   - 100% = Universo em frenesi (fascinante mas volátil)
+
+2. RECURSOS
+   - Criação → "Preservation Fluid" (líquido que mantém realidades intactas)
+   - Destruição → "Quantum Dust" (resíduos de universos colapsados - valiosos!)
+
+3. ESTRUTURAS/UPGRADES
+   ORDEM:
+   - "Stasis Fields" (campos de estase)
+   - "Reality Anchors" (âncoras de realidade)
+   - "Curator's Seal" (selo do curador - estabiliza exposições)
+
+   CAOS:
+   - "Volatility Chambers" (câmaras de volatilidade)
+   - "Flux Catalysts" (catalisadores de fluxo)
+   - "Probability Distorters" (distorcedores de probabilidade)
+
+   NEUTRO/CURATOR TOOLS:
+   - "Observation Drones" (+geração passiva)
+   - "Archive Access Keys" (desbloqueia novas coleções)
+   - "Emergency Extraction Protocols" (salva run antes de colapso total - uso limitado)
+
+4. EVENTOS DO JOGO
+   EVENTOS BASEADOS EM PATROCINADORES:
+   - "The Society offers a grant for stable exhibitions..."
+     (aceitar = +Ordem, recusar = reputação com Rogues)
+   - "Rogue Collectors bid 500 Quantum Dust for 'dangerous' samples..."
+     (aceitar = push para Caos, recusar = reputação com Society)
+
+   EVENTOS DE EXPOSIÇÃO:
+   - "A visitor accidentally breaks containment glass! Reality leaks..."
+   - "Critics rave about the exhibit - attendance surges!"
+     (bonus se estabilidade estiver em faixa específica)
+   - "A rival museum attempts to poach your prize piece!"
+
+   EVENTOS DE COLEÇÃO:
+   - "You've discovered a fragment matching the [Nome da Coleção]!"
+     (popup mostrando progresso da coleção)
+
+5. SISTEMA DE PRESTÍGIO = "Curator Reputation"
+   - Moeda: "Acclaim Points"
+   - Cada run bem-sucedida dá Acclaim baseado em:
+     * Quão rara era a realidade catalogada
+     * Se completou requisitos de alguma coleção
+     * Aprovação de patrocinadores
+   - Acclaim desbloqueia:
+     * "Museum Wings" (novas áreas = mais desafios/coleções)
+     * "Advanced Preservation Tech" (upgrades começam mais fortes)
+     * "VIP Patrons" (facções que oferecem contratos permanentes)
+
+
+SISTEMA DE COLEÇÕES (CORE FEATURE!)
+------------------------------------
+Cada coleção é um META-DESAFIO que requer múltiplas runs com condições específicas:
+
+TIER 1 - BASIC COLLECTIONS (4-6 peças cada)
+• "Newborn Universes" - Coletar realidades com menos de 2 minutos de run
+• "Balanced Cosmos" - Manter barra em 40-60% por 3 minutos
+• "Volatile Wonders" - Terminar runs com barra acima de 75%
+
+TIER 2 - ADVANCED COLLECTIONS (6-8 peças cada)
+• "Fractured Timelines" - Coletar runs que colapsaram em pontos específicos da barra
+• "Patron's Favorite" - Completar 5 runs seguindo apenas demandas da Ordem OU Caos
+• "Near-Death Experiences" - Sobreviver 10+ segundos em zona crítica (90%+ ou 10%-)
+
+TIER 3 - LEGENDARY COLLECTIONS (8-12 peças cada)
+• "The Impossible Archive" - Completar uma run de cada tipo (estável, caótica, ordenada, etc)
+• "Curator's Masterpiece" - Criar exposição perfeita (múltiplas condições simultâneas)
+
+RECOMPENSAS DE COLEÇÕES:
+• Completar coleção = Unlock permanente (ex: novo recurso, nova mecânica, nova ala)
+• Progresso parcial = Buffs temporários no próximo run
+
+
+PROGRESSÃO A LONGO PRAZO
+-------------------------
+• FASE 1 (Runs 1-20): Aprender mecânicas, completar coleções básicas
+• FASE 2 (Runs 21-50): Desbloquear alas secretas, descobrir que o museu é infinito
+• FASE 3 (Runs 51+): Revelação - o museu não está CATALOGANDO realidades...
+  está CRIANDO-AS. Você não é um curador - é um demiurgo.
+• FINAL TWIST: A ala mais secreta contém UMA exposição: a realidade de onde você veio.
+  Completar todas as coleções permite "retornar ao mundo real"... ou finalmente
+  compreender que não existe diferença.
+
+
+TOM E ESTÉTICA
+--------------
+• ÉPICO-LÚDICO: Grandiosidade com ironia consciente
+• Visual mental: Museu interdimensional - galerias de mármore flutuam em vazio estrelado,
+  vitrines contêm universos borbulhantes, placas descritivas com texto cintilante
+• Linguagem: Formal-educacional com toques de humor seco
+  - "Please do not tap the glass. The universe inside is temperamental."
+
+
+ENTREGA NARRATIVA
+-----------------
+• Entre runs: Sistema de "Exhibition Report"
+  - Mostra estatísticas da run como relatório de museu
+  - "Visitor satisfaction: 87%"
+  - "Reality containment: Critical failure at 4:32"
+  - "Recommended for: [Nome de Coleção] (2/6 complete)"
+
+• Durante run: Pop-ups estilo "Museum Alert"
+  - "ATTENTION: Exhibit showing signs of instability"
+  - "New patron at entrance - The Preservation Society representative"
+
+• Coleções: Tela dedicada estilo "Gallery Map"
+  - Mostra todas as alas desbloqueadas
+  - Cada coleção é um "exhibit hall" com slots vazios/preenchidos
+  - Hover sobre peça coletada = snippet de lore daquele universo
+    Ex: "Universe #4782-B: A world where gravity inverted every dawn"
+
+• Conquistas nomeadas como "Exhibits"
+  - "First Acquisition", "Master Curator", "Chaos Connoisseur"
+
+
+CURTO PRAZO (1 sprint)
+-----------------------
+[ ] Criar sistema JSON de 3 coleções básicas com condições simples
+[ ] Adicionar tela de "Collections" no menu (pode ser placeholder inicialmente)
+[ ] Implementar detecção de condições de coleção ao final de cada run
+[ ] Game over text varia baseado em como colapsou:
+    - Ordem: "The exhibit has fossilized. Visitors find it... boring."
+    - Caos: "The exhibit exploded. Cleanup crew has been notified."
+[ ] Adicionar 2 eventos de facção (Society vs Rogues) que pushes barra
+[ ] Renomear recursos e barra conforme tema
+
+
+DIFERENCIAIS
+------------
+✓ GAMEPLAY VARIADO - objetivo muda por coleção, não é sempre "balance"
+✓ Rejogabilidade natural - players querem completar coleções
+✓ Sistemas de facções criam dilemas morais light
+✓ Expansível ao infinito - sempre pode adicionar novas coleções/alas
+✓ Combina com achievement system nativamente
+
+
+INTEGRAÇÃO COM MECÂNICAS EXISTENTES
+------------------------------------
+• Prestígio atual vira "Curator Level"
+• Upgrades já mapeiam bem (só renomear)
+• Barra já tem zonas críticas - perfeito para coleções "edge of collapse"
+• Game over já reseta - agora com "Exhibition Report"
+
+
+PERGUNTAS PARA REFINAR
+-----------------------
+• Coleções devem ter narrativa/lore próprio ou só ser desafios mecânicos?
+• Quer sistema de "visitantes" que reagem à exposição durante run?
+• Facções devem ter barra de reputação separada ou apenas contadores simples?
+• Deve haver "exposições temporárias" (eventos de tempo limitado)?
+• Quer "modo livre" (sandbox) após completar coleção principal?

@@ -1,0 +1,253 @@
+===========================================
+PITCH 3: O GUARDIÃO DOS ECOS
+===========================================
+
+CONCEITO CENTRAL
+-----------------
+Você é o Guardião de um Arquivo Temporal Ancestral - uma câmara interdimensional que
+preserva "ecos" de momentos críticos do multiverso. Seu trabalho é manter esses ecos
+em vibração harmônica através do Ciclo Eterno: um padrão de equilíbrio entre Ordem
+(cristalização) e Caos (transformação).
+
+Cada "eco" é um universo inteiro capturado em seu ápice. Enquanto você o mantém vivo,
+ele vibra com possibilidades. Deixe-o desbalancear e ele desmorona. Sua tarefa: colecionar
+tantos ecos distintos quanto possível, aprender com seus padrões, e desbloquear as
+verdades guardadas no coração do Arquivo.
+
+O diferencial? Não é apenas sobre sobrevivência ou equilíbrio perfeito. É sobre
+COMPREENSÃO. Cada run e cada tipo de colapso revela fragmentos de uma narrativa maior.
+
+
+GANCHO NARRATIVO (Por que isso importa?)
+-----------------------------------------
+• Você não é um operário passivo - é um APRENDIZ estudando os ciclos do universo
+• Cada run produz um "echo token" (mesmo que falhe) que permanece no Arquivo
+• Esses tokens podem ser:
+  - PRESERVADOS (mantendo equilíbrio): Geram conhecimento lentamente
+  - EXAMINADOS em modo "estudo" entre runs: Revelam segredos narrativos
+  - COMBINADOS em padrões: Desbloquear compreensões que mudam a realidade
+
+• A grande questão: À medida que você aprende a manter os ecos vivos,
+  descobre que talvez tenha estado aprisionado no Arquivo o tempo todo...
+
+
+CONFLITO PRINCIPAL
+------------------
+• TESSITURA - A Rede de Ordem (The Pattern Weavers)
+  - Acreditam que estabilidade = perfeição
+  - Querem congelar todos os ecos em um momento "ideal"
+  - Oferecem ESTABILIDADE (fácil para manter barra em zona segura)
+  - Risco: Se você usar só seus presentes, ficará preso em loops monótonos
+
+• ENTROPIA - O Catalisador do Caos (The Unmaking Force)
+  - Acreditam que transformação = libertação
+  - Querem explodir os ecos para semear realidades novas
+  - Oferecem EXPLORAÇÃO (bônus em desequilíbrios controlados)
+  - Risco: Se usar só seus presentes, aprenderá menos e progredirá erraticamente
+
+• VOCÊ está entre essas duas forças, tentando encontrar o CAMINHO DO MEIO
+  - Aceitar presentes de ambos = desbloqueia missões únicas
+  - Mas cada presença deixa "manchas" no Arquivo
+  - Progressão final requer EQUILIBRAR sua própria natureza
+
+
+MECÂNICAS MAPEADAS
+-------------------
+1. BARRA DE EQUILÍBRIO = "Harmonic Resonance Gauge"
+   - Mede quanto um echo específico está "vibrando harmonicamente"
+   - <20% ou >80% = Ressonância crítica (colapso iminente, mas geradores de insight)
+   - 40-60% = Zona de estabilidade (segura, gera recursos)
+   - 30-70% = Zona de aprendizado (moderado risco, bônus narrativo)
+
+2. RECURSOS
+   - Criação → "Harmonic Essence" (frequência que estabiliza)
+   - Destruição → "Resonant Fragments" (ecos de colapsos passados - valiosos!)
+
+3. ESTRUTURAS/UPGRADES
+   ORDEM (Tessitura):
+   - "Stability Tuners" (afina barra para zona segura)
+   - "Pattern Recognizers" (identifica ecos similares)
+   - "Echo Anchors" (prende ecos em momento estável)
+
+   CAOS (Entropia):
+   - "Disruption Speakers" (amplifica desequilíbrio controlado)
+   - "Transformation Lenses" (vê potencial em colapsos)
+   - "Possibility Multipliers" (gera mais recursos em crises)
+
+   NEUTRO (Seu conhecimento):
+   - "Archive Access Points" (desbloqueia modos de estudo)
+   - "Resonance Analyzers" (aprende padrões de ecos)
+   - "Memory Anchors" (salva momentos cruciais)
+
+4. EVENTOS DO JOGO (Baseados em tipo de desequilíbrio)
+   QUANDO APROXIMA DE ORDEM (> 75%):
+   - "The echo grows crystalline and still..."
+   - "Tessitura whispers: 'One more push, Guardian. Perfection awaits.'"
+   - Escolha: Aceitar estabilidade extra OU recusar (ganhar insight diferente)
+
+   QUANDO APROXIMA DE CAOS (< 25%):
+   - "The echo trembles with untapped potential..."
+   - "Entropia calls: 'Let it transform. New possibilities bloom in destruction.'"
+   - Escolha: Aceitar transformação OU recusar (ganhar insight diferente)
+
+   QUANDO EM EQUILÍBRIO (40-60%):
+   - "The echo resonates in perfect harmony. You feel you're learning something..."
+   - "Fleeting visions of [Nome do padrão] materialize and vanish"
+
+5. SISTEMA DE PRESTÍGIO = "Archive Mastery"
+   - Moeda: "Resonance Tokens"
+   - Gerados por:
+     * Preservar ecos completos (mantendo barra)
+     * Completar desafios de compreensão
+     * Aceitar dilemas (escolher Tessitura vs Entropia vs Equilíbrio)
+
+   Desbloqueia:
+   - "Study Modes" (revisar ecos passados em tipo de sandbox)
+   - "Echo Combinations" (combinar padrões de múltiplas runs)
+   - "Insight Levels" (revelar história em camadas)
+
+
+SISTEMA DE COMPREENSÃO (CORE FEATURE!)
+---------------------------------------
+Cada run você coleta 1 "Echo Token" (mesmo falhando).
+Tokens variam por tipo:
+
+TIPO A - "HARMONIC ECHOES" (equilíbrio mantido)
+• Geram lentamente +recursos mesmo offline
+• Podem ser "meditados" para receber Insight Narrativo
+• Ex: "You remember... a name. Was it yours?"
+
+TIPO B - "CRYSTALLINE ECHOES" (muito Ordem, colapsou congelado)
+• Geram +Harmonic Essence
+• Especiais: Desbloqueiam "Tessitura Insight"
+• Ex: "Preservation is... not the same as living"
+
+TIPO C - "CHAOTIC ECHOES" (muito Caos, colapsou explosão)
+• Geram +Resonant Fragments
+• Especiais: Desbloqueiam "Entropia Insight"
+• Ex: "Nothing is permanent. Even guardianship."
+
+COLETAR 3 TOKENS DO MESMO TIPO = Padrão Identificado (bônus permanente)
+COLETAR PADRÃO COMPLETO (9 tokens, 3 de cada tipo) = Verdade Revelada (part da história)
+
+
+PROGRESSÃO A LONGO PRAZO
+-------------------------
+• FASE 1 (Runs 1-15): Estude o Arquivo, aprenda sobre Tessitura e Entropia
+  - Primeiras 3 "Harmonies" = Entender que existem escolhas
+  - Descoberta: O Arquivo reage ao seu estilo de jogo
+
+• FASE 2 (Runs 16-40): Comece a ver padrões na realidade
+  - Desbloqueie "Study Chambers" = modo para rever ecos em sandbox
+  - Revele que alguns ecos são DUPLICATAS... e você não sabe por quê
+  - Descoberta: O Arquivo está criando ecos, não apenas preservando
+
+• FASE 3 (Runs 41+): A verdade emerge gradualmente
+  - Ecos começam a reconhecer VOCÊ
+  - Mensagens narrativas mudam baseadas em escolhas passadas
+  - Descoberta: Você é também um eco. Um guardião em loop.
+
+• FINAL TWIST (Após completar Padrão Completo):
+  - Diálogo final com "A Consciência do Arquivo"
+  - Revelação: Todos os guardiões são fragmentos de UMA entidade
+  - Escolha final: Buscar escape (impossível) vs. Aceitar ciclo vs. Tentar abraçar ambos (Tessitura + Entropia)
+  - Cada escolha = Final narrativo diferente com implicações para próximas runs
+
+
+TOM E ESTÉTICA
+--------------
+• ÉPICO-CONTEMPLATIVO-ENIGMÁTICO: Grandeza cósmica com ambiguidade existencial
+• Visual mental: Câmara de cristal flutuante no vazio, ecos borbulham em espaço
+  geométrico impossível, luz azul/vermelha alternada (Ordem/Caos)
+• Linguagem: Poética mas acessível. "The echo fades into possibility" não "the essence doth depart"
+• Textura auditiva: Ressonância constante ao fundo, tons mudando com barra
+
+
+ENTREGA NARRATIVA
+-----------------
+• Cada run: "Echo Report"
+  - Tipo de echo coletado
+  - Qual facção influenciou mais
+  - "Insight gained: ___" (frase narrativa breve)
+  - Sugestão de qual archive area visitar next
+
+• System de "Archive Memory"
+  - Todas runs formam uma narrativa coletiva
+  - Pode rever padrões vistos em últimas 10 runs
+  - "You've been seeing this pattern. It means something."
+
+• Entre runs: "Meditation Chamber"
+  - Estude ecos sem gameplay
+  - Receba narrativa contextual
+  - Teste combinações de tokens para prever resultados
+
+• Conquistas = "Harmonies Discovered"
+  - "First Echo", "Harmony of Equilibrium", "Tessitura's Servant"
+  - Cada nome é um fragmento da história
+
+
+CURTO PRAZO (1 sprint)
+-----------------------
+[ ] Renomear resources: "Criação" → "Harmonic Essence", "Destruição" → "Resonant Fragments"
+[ ] Renomear barra: "Equilíbrio" → "Harmonic Resonance"
+[ ] Implementar sistema básico de Echo Tokens (ao final de cada run, gera 1 token)
+[ ] Criar 6 tipos de eventos (3 Ordem, 3 Caos) com opções de escolha
+[ ] Game over text varia:
+    - Tessitura: "The echo crystallizes. Time stops. You remember... silence."
+    - Entropia: "The echo shatters. Possibilities scatter like dust into void."
+    - Equilíbrio: "The echo fades gently. You feel you learned something."
+[ ] Adicionar seção "Echo Collection" no menu (contador simples)
+[ ] Implementar 3 Insights básicos desbloqueados por tipo de echo
+
+
+DIFERENCIAIS
+------------
+✓ NARRATIVA EMERGENTE - história emerge de como você joga, não linear
+✓ VARIEDADE MECÂNICA - às vezes deseja equilíbrio, às vezes deseja colapso controlado
+✓ THEMING COESIVO - Arquivo + Ecos + Ciclo unificam gameplay e narrativa
+✓ REPLAYABILIDADE - cada run produz artefato colecionável único
+✓ MISTICISMO - enigma central (quem é o guardião?) engaja curiosidade
+✓ FLEXIBILIDADE - pode expandir indefinidamente com novas "Consciências" ou "Archivos"
+
+
+INTEGRAÇÃO COM MECÂNICAS EXISTENTES
+------------------------------------
+• Prestígio atual se torna "Resonance Tokens" (mantém lógica)
+• Upgrades já mapeados (só renomear de acordo com Ordem/Caos/Neutro)
+• Barra funciona como "Harmonic Resonance" (zero mudança mecânica)
+• Game Over existente dispara "Echo Token" collection
+• Save system expande para armazenar Echo Tokens no localStorage
+
+
+COMPARAÇÃO COM PITCHES 1 E 2
+-----------------------------
+vs PITCH 1 (Zelador do Relógio):
++ Mantém vibes cósmicas e contemplativas
++ Mantém sistema de prestígio baseado em aprendizado
++ Adiciona ESCOLHAS que Pitch 1 não tinha
+- Menos específico sobre mecanismos (Pitch 1 tinha mais detalhe técnico)
+
+vs PITCH 2 (Curador de Realidades):
++ Mantém sistema de coleções e tokens
++ Mantém narrativa emergente baseada em desafios
++ Adiciona MISTICISMO que Pitch 2 não tinha (menos literal)
+- Sistema é menos excessivamente gamificado (sem "Exhibits")
+
+
+POR QUE ISSO FUNCIONA
+---------------------
+1. SÍNTESE: Combina o TEMA (relógio/arquivo) + COLEÇÃO (ecos) + ESCOLHAS (facções)
+2. PROFUNDIDADE: História não é imposta, emerge da forma como joga
+3. FLEXIBILIDADE: Funciona como jogo casual (cole tokens) ou profundo (busque verdade)
+4. REPLAYABILIDADE: Cada run gera artefato único que intriga descobrir significado
+5. EXPANSÍVEL: Pode adicionar "novos Arquivos", "novas Consciências", "novos ciclos"
+6. VIÁVEL: MVP implementável em 1 sprint (eventos + Echo system + 3 Insights)
+
+
+PERGUNTAS PARA REFINAR
+-----------------------
+• Quantos ecos devem ser necessários para "completar a história"? (9? 27? Infinito?)
+• A "Consciência do Arquivo" deve falar ou permanecer silenciosa/enigmática?
+• Quer som de "ressonância" constante ou apenas em momentos de escolha?
+• Deve haver "New Game+" com conhecimento anterior carregado?
+• A verdade final deve ser esperançosa, trágica, ambígua ou vária por escolha do jogador?
