@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
+import i18n from './i18n';
 
-// Cena para a Interface do Usuário (incluindo tela de Game Over)
+// UI Scene (including Game Over screen)
 class UIScene extends Phaser.Scene {
   constructor() {
     super({ key: 'UIScene' });
@@ -23,8 +24,8 @@ class UIScene extends Phaser.Scene {
       -panelWidth / 2, -panelHeight / 2, panelWidth, panelHeight
     );
     
-    const title = this.add.text(0, -panelHeight / 2 + 40, 'O Ciclo se Reinicia', { 
-      fontSize: isMobile ? '20px' : '28px' 
+    const title = this.add.text(0, -panelHeight / 2 + 40, i18n.get('gameOver.title'), {
+      fontSize: isMobile ? '20px' : '28px'
     }).setOrigin(0.5);
     
     this.timeSurvivedText = this.add.text(0, -30, '', { 
@@ -41,7 +42,7 @@ class UIScene extends Phaser.Scene {
       0x00ff00
     ).setInteractive();
     
-    const restartText = this.add.text(0, panelHeight / 2 - 40, 'Recomeçar', { 
+    const restartText = this.add.text(0, panelHeight / 2 - 40, i18n.get('buttons.witnessNextCycle'), {
       fill: '#000',
       fontSize: isMobile ? '14px' : '16px'
     }).setOrigin(0.5);
@@ -54,17 +55,17 @@ class UIScene extends Phaser.Scene {
       mainScene.scene.restart({ balanceBoost: this.nextBoost });
     });
 
-    // Ouvir o evento de fim de jogo
+    // Listen for game over event
     mainScene.events.on('gameOver', (stats) => {
-      this.timeSurvivedText.setText(`Tempo Sobrevivido: ${stats.timeSurvived.toFixed(2)}s`);
-      this.boostGainedText.setText(`Bônus Ganhos: +${stats.boostGained.toFixed(4)}%`);
-      this.nextBoost = stats.newTotalBoost; // Armazena o novo total de bônus
+      this.timeSurvivedText.setText(`${i18n.get('gameOver.timeSurvived')}: ${stats.timeSurvived.toFixed(2)}s`);
+      this.boostGainedText.setText(`${i18n.get('gameOver.aeonFragmentsGained')}: +${stats.boostGained.toFixed(4)}`);
+      this.nextBoost = stats.newTotalBoost; // Stores the new total boost
       this.gameOverPanel.setVisible(true);
     });
   }
 }
 
-// Cena Principal do Jogo
+// Main Game Scene
 class MainScene extends Phaser.Scene {
   constructor() {
     super({ key: 'MainScene' });
@@ -126,19 +127,19 @@ class MainScene extends Phaser.Scene {
     const textSize = isMobile ? '16px' : '20px';
     const smallTextSize = isMobile ? '14px' : '16px';
     
-    this.creatorEssenceText = this.add.text(20, 20, 'Criação: 0', { 
-      fontSize: textSize, 
-      fill: '#fff' 
+    this.creatorEssenceText = this.add.text(20, 20, `${i18n.get('resources.chronoEssence')}: 0`, {
+      fontSize: textSize,
+      fill: '#fff'
     });
     
-    this.chaoticEssenceText = this.add.text(gameWidth - 20, 20, 'Caos: 0', { 
-      fontSize: textSize, 
-      fill: '#fff' 
+    this.chaoticEssenceText = this.add.text(gameWidth - 20, 20, `${i18n.get('resources.entropyShards')}: 0`, {
+      fontSize: textSize,
+      fill: '#fff'
     }).setOrigin(1, 0);
     
-    this.boostText = this.add.text(gameWidth / 2, 20, `Bônus: ${this.balanceBoost.toFixed(4)}%`, { 
-      fontSize: smallTextSize, 
-      fill: '#00ffff' 
+    this.boostText = this.add.text(gameWidth / 2, 20, `${i18n.get('resources.aeonFragments')}: ${this.balanceBoost.toFixed(4)}`, {
+      fontSize: smallTextSize,
+      fill: '#00ffff'
     }).setOrigin(0.5, 0);
     
     this.imbalanceTimerText = this.add.text(gameWidth / 2, gameHeight - 100, '', { 
@@ -159,7 +160,7 @@ class MainScene extends Phaser.Scene {
       0x00ff00
     ).setInteractive();
     
-    this.add.text(gameWidth * 0.25, buttonY, 'Gerar Criação', { 
+    this.add.text(gameWidth * 0.25, buttonY, i18n.get('buttons.generateChrono'), {
       fill: '#000',
       fontSize: isMobile ? '14px' : '16px'
     }).setOrigin(0.5);
@@ -174,7 +175,7 @@ class MainScene extends Phaser.Scene {
       0xff0000
     ).setInteractive();
     
-    this.add.text(gameWidth * 0.75, buttonY, 'Gerar Caos', { 
+    this.add.text(gameWidth * 0.75, buttonY, i18n.get('buttons.generateEntropy'), {
       fill: '#000',
       fontSize: isMobile ? '14px' : '16px'
     }).setOrigin(0.5);
@@ -188,12 +189,12 @@ class MainScene extends Phaser.Scene {
     const structureButtonY = isMobile ? 200 : 280;
     
     // Creator Structures (Left side)
-    this.creatorStructureLevelText = this.add.text(20, structureTextY, 'Sementes: 0', { 
+    this.creatorStructureLevelText = this.add.text(20, structureTextY, `${i18n.get('structures.mainspringStabilizers')}: 0`, {
       fill: '#fff',
       fontSize: isMobile ? '14px' : '16px'
     });
     
-    this.creatorStructureCostText = this.add.text(20, structureCostY, 'Custo: 10 Caos', { 
+    this.creatorStructureCostText = this.add.text(20, structureCostY, `${i18n.get('cost')}: 10 ${i18n.get('resources.entropyShards')}`, {
       fill: '#fff',
       fontSize: isMobile ? '12px' : '14px'
     });
@@ -206,7 +207,7 @@ class MainScene extends Phaser.Scene {
       0x00dd00
     ).setInteractive();
     
-    this.add.text(gameWidth * 0.25, structureButtonY, 'Comprar Semente', { 
+    this.add.text(gameWidth * 0.25, structureButtonY, i18n.get('buttons.buyStabilizer'), {
       fill: '#000',
       fontSize: isMobile ? '12px' : '14px'
     }).setOrigin(0.5);
@@ -220,12 +221,12 @@ class MainScene extends Phaser.Scene {
     });
 
     // Chaotic Structures (Right side)
-    this.chaoticStructureLevelText = this.add.text(gameWidth - 20, structureTextY, 'Fragmentos: 0', { 
+    this.chaoticStructureLevelText = this.add.text(gameWidth - 20, structureTextY, `${i18n.get('structures.quantumLubricantInjectors')}: 0`, {
       fill: '#fff',
       fontSize: isMobile ? '14px' : '16px'
     }).setOrigin(1, 0);
     
-    this.chaoticStructureCostText = this.add.text(gameWidth - 20, structureCostY, 'Custo: 10 Criação', { 
+    this.chaoticStructureCostText = this.add.text(gameWidth - 20, structureCostY, `${i18n.get('cost')}: 10 ${i18n.get('resources.chronoEssence')}`, {
       fill: '#fff',
       fontSize: isMobile ? '12px' : '14px'
     }).setOrigin(1, 0);
@@ -238,7 +239,7 @@ class MainScene extends Phaser.Scene {
       0xdd0000
     ).setInteractive();
     
-    this.add.text(gameWidth * 0.75, structureButtonY, 'Comprar Fragmento', { 
+    this.add.text(gameWidth * 0.75, structureButtonY, i18n.get('buttons.buyInjector'), {
       fill: '#000',
       fontSize: isMobile ? '12px' : '14px'
     }).setOrigin(0.5);
@@ -303,7 +304,7 @@ class MainScene extends Phaser.Scene {
       balanceBoost: this.balanceBoost
     };
     localStorage.setItem('caosCicleSave', JSON.stringify(saveData));
-    console.log('Jogo salvo!');
+    console.log('Game saved!');
   }
 
   saveResetState(newBoost) {
@@ -316,7 +317,7 @@ class MainScene extends Phaser.Scene {
       balanceBoost: newBoost
     };
     localStorage.setItem('caosCicleSave', JSON.stringify(saveData));
-    console.log('Estado de reset salvo!');
+    console.log('Reset state saved!');
   }
 
   loadGame() {
@@ -334,46 +335,46 @@ class MainScene extends Phaser.Scene {
   }
 
   update(time, delta) {
-    if (this.isGameOver) return; // Para completamente a lógica de update se o jogo acabou
+    if (this.isGameOver) return; // Stop all update logic if game is over
 
-    this.timeSurvived += delta / 1000; // em segundos
+    this.timeSurvived += delta / 1000; // in seconds
 
-    // --- Geração Passiva ---
+    // --- Passive Generation ---
     this.creatorEssence += (this.creatorStructures * 1) * (delta / 1000);
     this.chaoticEssence += (this.chaoticStructures * 1) * (delta / 1000);
 
-    // --- Atualizar UI ---
-    this.creatorEssenceText.setText('Criação: ' + Math.floor(this.creatorEssence));
-    this.chaoticEssenceText.setText('Caos: ' + Math.floor(this.chaoticEssence));
-    this.creatorStructureLevelText.setText('Sementes: ' + this.creatorStructures);
-    this.creatorStructureCostText.setText('Custo: ' + this.getStructureCost('creator') + ' Caos');
-    this.chaoticStructureLevelText.setText('Fragmentos: ' + this.chaoticStructures);
-    this.chaoticStructureCostText.setText('Custo: ' + this.getStructureCost('chaotic') + ' Criação');
+    // --- Update UI ---
+    this.creatorEssenceText.setText(`${i18n.get('resources.chronoEssence')}: ${Math.floor(this.creatorEssence)}`);
+    this.chaoticEssenceText.setText(`${i18n.get('resources.entropyShards')}: ${Math.floor(this.chaoticEssence)}`);
+    this.creatorStructureLevelText.setText(`${i18n.get('structures.mainspringStabilizers')}: ${this.creatorStructures}`);
+    this.creatorStructureCostText.setText(`${i18n.get('cost')}: ${this.getStructureCost('creator')} ${i18n.get('resources.entropyShards')}`);
+    this.chaoticStructureLevelText.setText(`${i18n.get('structures.quantumLubricantInjectors')}: ${this.chaoticStructures}`);
+    this.chaoticStructureCostText.setText(`${i18n.get('cost')}: ${this.getStructureCost('chaotic')} ${i18n.get('resources.chronoEssence')}`);
 
-    // --- Lógica de Equilíbrio e Fim de Jogo ---
+    // --- Balance and Game Over Logic ---
     const totalEssence = this.creatorEssence + this.chaoticEssence;
-    let balance = 0; // de -1 (Caos total) a +1 (Criação total)
+    let balance = 0; // from -1 (Total Chaos) to +1 (Total Order)
     if (totalEssence > 0) {
       balance = (this.creatorEssence - this.chaoticEssence) / totalEssence;
     }
 
-    // Atualiza a posição do marcador (responsive)
+    // Update marker position (responsive)
     this.balanceMarker.x = this.balanceBarProps.centerX + (balance * (this.balanceBarProps.width / 2));
     this.balanceMarker.y = this.balanceBarProps.y;
 
-    // Nova lógica de fim de jogo com temporizador
+    // Game over logic with timer
     const currentImbalanceLimit = this.imbalanceLimit - (this.balanceBoost / 100);
     if (Math.abs(balance) > currentImbalanceLimit) {
       this.imbalanceTimer += delta;
-      this.imbalanceTimerText.setText(`Colapso em: ${((10000 - this.imbalanceTimer) / 1000).toFixed(1)}s`);
+      this.imbalanceTimerText.setText(`${i18n.get('collapse')}: ${((10000 - this.imbalanceTimer) / 1000).toFixed(1)}s`);
       this.imbalanceTimerText.setVisible(true);
 
       if (this.imbalanceTimer >= 10000) {
-        this.isGameOver = true; // Ativa a flag de fim de jogo
+        this.isGameOver = true; // Set game over flag
         const boostGained = this.timeSurvived / 100;
         const newTotalBoost = this.balanceBoost + boostGained;
 
-        this.saveResetState(newTotalBoost); // Salva o estado de reset imediatamente
+        this.saveResetState(newTotalBoost); // Save reset state immediately
 
         this.scene.pause();
         this.events.emit('gameOver', {

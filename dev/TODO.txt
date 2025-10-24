@@ -6,27 +6,34 @@
 FASE 0: FUNDAÇÃO NARRATIVA (Essencial para MVP)
 ================================================================================
 
-## 0.1 Renomeação de Recursos e UI (PRIORITY)
-- [ ] Renomear "Essência Criadora" → "Chrono-Essence" em toda a codebase
+## 0.1 Renomeação de Recursos e UI (PRIORITY) ✅ CONCLUÍDO
+- [x] Renomear "Essência Criadora" → "Chrono-Essence" em toda a codebase
   - Arquivo: js/app.js - resources object
   - UI: Display text, button labels
   - localStorage: Schema de save
-- [ ] Renomear "Essência Caótica" → "Entropy Shards"
+- [x] Renomear "Essência Caótica" → "Entropy Shards"
   - Arquivo: js/app.js - resources object
   - UI: Display text, button labels
   - localStorage: Schema de save
-- [ ] Renomear barra de "Equilíbrio" → "Phase Deviation"
+- [x] Renomear barra de "Equilíbrio" → "Phase Deviation"
   - Barra visual: Rótulo e tooltip
   - Textos do jogo
   - Cálculos internos (manter a mesma lógica, mudar apenas nome)
-- [ ] Renomear "Boost de Equilíbrio" → "Aeon Fragments"
+- [x] Renomear "Boost de Equilíbrio" → "Aeon Fragments"
   - Display em UI (top corner ou painel de progressão)
   - localStorage: Schema de save
   - Sistema de compras (Horological Mastery)
-- [ ] Renomear "Prestige" → "Horological Mastery"
+- [x] Renomear "Prestige" → "Horological Mastery"
   - Painel de upgrades permanentes
   - UI de menu
   - Descrições e flavor text
+
+**NOTAS IMPLEMENTAÇÃO 0.1:**
+- Sistema de i18n centralizado criado em `js/i18n.js`
+- Suporte para Inglês (en) e Português (pt)
+- Todas as strings UI refatoradas para usar i18n.get()
+- Preparado para adicionar novos idiomas futuramente
+- localStorage ainda usa variáveis internas (creatorEssence, chaoticEssence, etc)
 
 ## 0.2 Game Over e Reset Narrativo
 - [ ] Atualizar texto de Game Over (decorativo):

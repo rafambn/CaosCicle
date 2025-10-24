@@ -4,3 +4,8 @@
 node_modules
 dist
 .cache
+GEMINI.md
+CLAUDE.md
+dev
+.idea
+package-lock.json
