@@ -46,8 +46,8 @@ FASE 0: FUNDAÇÃO NARRATIVA (Essencial para MVP)
   - Fragmento de lore desbloqueado (se milestone atingido)
 - [x] Adicionar botão "Witness the Next Cycle" em vez de "Play Again"
 
-## 0.3 Flavor Text Base (CRIAÇÃO - Ordem)
-- [ ] "Mainspring Stabilizers":
+## 0.3 Flavor Text Base (CRIAÇÃO - Ordem) ✅ CONCLUÍDO
+- [x] "Mainspring Stabilizers":
   Flavor: "Every second costs eternity. These springs ensure time flows, never stops."
   Description: "Gera 1 Chrono-Essence por segundo"
 - [ ] "Gear Calibration Arrays":
@@ -58,8 +58,8 @@ FASE 0: FUNDAÇÃO NARRATIVA (Essencial para MVP)
   Description: "+10% de produção base"
 - [ ] Estruturas Tier 4 & 5: Adicionar flavor text similar
 
-## 0.4 Flavor Text Base (DESTRUIÇÃO - Caos)
-- [ ] "Quantum Lubricant Injectors":
+## 0.4 Flavor Text Base (DESTRUIÇÃO - Caos) ✅ CONCLUÍDO
+- [x] "Quantum Lubricant Injectors":
   Flavor: "Liquid paradox. What flows backward also moves forward—both, neither, eternally."
   Description: "Gera 1 Entropy Shard por segundo"
 - [ ] "Paradox Coils":

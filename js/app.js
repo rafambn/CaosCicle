@@ -248,34 +248,41 @@ class MainScene extends Phaser.Scene {
     chaoticButton.on('pointerdown', () => { this.chaoticEssence++; });
 
     // --- UI e Lógica das Estruturas (Responsive) ---
-    const structureY = isMobile ? 140 : 200;
-    const structureTextY = isMobile ? 140 : 200;
-    const structureCostY = isMobile ? 160 : 220;
-    const structureButtonY = isMobile ? 200 : 280;
-    
-    // Creator Structures (Left side)
-    this.creatorStructureLevelText = this.add.text(20, structureTextY, `${i18n.get('structures.mainspringStabilizers')}: 0`, {
-      fill: '#fff',
-      fontSize: isMobile ? '14px' : '16px'
+    const structureXPadding = 20;
+    let creatorY = isMobile ? 150 : 170;
+
+    // --- Creator Structures (Left Side) ---
+    this.creatorStructureLevelText = this.add.text(structureXPadding, creatorY, `${i18n.get('structures.mainspringStabilizers.name')}: 0`, {
+      fill: '#00ff00',
+      fontSize: isMobile ? '14px' : '16px',
+      fontStyle: 'bold'
     });
+    creatorY += this.creatorStructureLevelText.height + 5;
+
+    const creatorDesc = this.add.text(structureXPadding, creatorY, i18n.get('structures.mainspringStabilizers.description'), {
+      fill: '#cccccc',
+      fontSize: isMobile ? '12px' : '14px'
+    });
+    creatorY += creatorDesc.height + 5;
+
+    const creatorFlavor = this.add.text(structureXPadding, creatorY, i18n.get('structures.mainspringStabilizers.flavor'), {
+      fill: '#999999',
+      fontSize: isMobile ? '11px' : '13px',
+      fontStyle: 'italic',
+      wordWrap: { width: gameWidth / 2 - (structureXPadding * 2) }
+    });
+    creatorY += creatorFlavor.height + 10;
     
-    this.creatorStructureCostText = this.add.text(20, structureCostY, `${i18n.get('cost')}: 10 ${i18n.get('resources.entropyShards')}`, {
+    this.creatorStructureCostText = this.add.text(structureXPadding, creatorY, `${i18n.get('cost')}: 10 ${i18n.get('resources.entropyShards')}`, {
       fill: '#fff',
       fontSize: isMobile ? '12px' : '14px'
     });
+    creatorY += this.creatorStructureCostText.height + 10;
     
-    const buyCreatorStructureBtn = this.add.rectangle(
-      gameWidth * 0.25, 
-      structureButtonY, 
-      buttonWidth, 
-      buttonHeight - 10, 
-      0x00dd00
-    ).setInteractive();
-    
-    this.add.text(gameWidth * 0.25, structureButtonY, i18n.get('buttons.buyStabilizer'), {
-      fill: '#000',
-      fontSize: isMobile ? '12px' : '14px'
-    }).setOrigin(0.5);
+    const btnH = buttonHeight - 10;
+    const btnY = creatorY + (btnH / 2);
+    const buyCreatorStructureBtn = this.add.rectangle(gameWidth * 0.25, btnY, buttonWidth, btnH, 0x00dd00).setInteractive();
+    this.add.text(buyCreatorStructureBtn.x, buyCreatorStructureBtn.y, i18n.get('buttons.buyStabilizer'), { fill: '#000', fontSize: isMobile ? '12px' : '14px' }).setOrigin(0.5);
     
     buyCreatorStructureBtn.on('pointerdown', () => {
       const cost = this.getStructureCost('creator');
@@ -285,29 +292,41 @@ class MainScene extends Phaser.Scene {
       }
     });
 
-    // Chaotic Structures (Right side)
-    this.chaoticStructureLevelText = this.add.text(gameWidth - 20, structureTextY, `${i18n.get('structures.quantumLubricantInjectors')}: 0`, {
-      fill: '#fff',
-      fontSize: isMobile ? '14px' : '16px'
+    // --- Chaotic Structures (Right Side) ---
+    let chaoticY = isMobile ? 150 : 170; // Reset Y for the right column
+    const rightColumnX = gameWidth - structureXPadding;
+
+    this.chaoticStructureLevelText = this.add.text(rightColumnX, chaoticY, `${i18n.get('structures.quantumLubricantInjectors.name')}: 0`, {
+      fill: '#ff0000',
+      fontSize: isMobile ? '14px' : '16px',
+      fontStyle: 'bold'
     }).setOrigin(1, 0);
+    chaoticY += this.chaoticStructureLevelText.height + 5;
+
+    const chaoticDesc = this.add.text(rightColumnX, chaoticY, i18n.get('structures.quantumLubricantInjectors.description'), {
+      fill: '#cccccc',
+      fontSize: isMobile ? '12px' : '14px'
+    }).setOrigin(1, 0);
+    chaoticY += chaoticDesc.height + 5;
+
+    const chaoticFlavor = this.add.text(rightColumnX, chaoticY, i18n.get('structures.quantumLubricantInjectors.flavor'), {
+      fill: '#999999',
+      fontSize: isMobile ? '11px' : '13px',
+      fontStyle: 'italic',
+      align: 'right',
+      wordWrap: { width: gameWidth / 2 - (structureXPadding * 2) }
+    }).setOrigin(1, 0);
+    chaoticY += chaoticFlavor.height + 10;
     
-    this.chaoticStructureCostText = this.add.text(gameWidth - 20, structureCostY, `${i18n.get('cost')}: 10 ${i18n.get('resources.chronoEssence')}`, {
+    this.chaoticStructureCostText = this.add.text(rightColumnX, chaoticY, `${i18n.get('cost')}: 10 ${i18n.get('resources.chronoEssence')}`, {
       fill: '#fff',
       fontSize: isMobile ? '12px' : '14px'
     }).setOrigin(1, 0);
+    chaoticY += this.chaoticStructureCostText.height + 10;
     
-    const buyChaoticStructureBtn = this.add.rectangle(
-      gameWidth * 0.75, 
-      structureButtonY, 
-      buttonWidth, 
-      buttonHeight - 10, 
-      0xdd0000
-    ).setInteractive();
-    
-    this.add.text(gameWidth * 0.75, structureButtonY, i18n.get('buttons.buyInjector'), {
-      fill: '#000',
-      fontSize: isMobile ? '12px' : '14px'
-    }).setOrigin(0.5);
+    const chaoticBtnY = chaoticY + (btnH / 2);
+    const buyChaoticStructureBtn = this.add.rectangle(gameWidth * 0.75, chaoticBtnY, buttonWidth, btnH, 0xdd0000).setInteractive();
+    this.add.text(buyChaoticStructureBtn.x, buyChaoticStructureBtn.y, i18n.get('buttons.buyInjector'), { fill: '#000', fontSize: isMobile ? '12px' : '14px' }).setOrigin(0.5);
     
     buyChaoticStructureBtn.on('pointerdown', () => {
       const cost = this.getStructureCost('chaotic');
@@ -416,9 +435,9 @@ class MainScene extends Phaser.Scene {
     // --- Update UI ---
     this.creatorEssenceText.setText(`${i18n.get('resources.chronoEssence')}: ${Math.floor(this.creatorEssence)}`);
     this.chaoticEssenceText.setText(`${i18n.get('resources.entropyShards')}: ${Math.floor(this.chaoticEssence)}`);
-    this.creatorStructureLevelText.setText(`${i18n.get('structures.mainspringStabilizers')}: ${this.creatorStructures}`);
+    this.creatorStructureLevelText.setText(`${i18n.get('structures.mainspringStabilizers.name')}: ${this.creatorStructures}`);
     this.creatorStructureCostText.setText(`${i18n.get('cost')}: ${this.getStructureCost('creator')} ${i18n.get('resources.entropyShards')}`);
-    this.chaoticStructureLevelText.setText(`${i18n.get('structures.quantumLubricantInjectors')}: ${this.chaoticStructures}`);
+    this.chaoticStructureLevelText.setText(`${i18n.get('structures.quantumLubricantInjectors.name')}: ${this.chaoticStructures}`);
     this.chaoticStructureCostText.setText(`${i18n.get('cost')}: ${this.getStructureCost('chaotic')} ${i18n.get('resources.chronoEssence')}`);
 
     // --- Balance and Game Over Logic ---

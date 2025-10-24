@@ -15,8 +15,16 @@ const i18n = {
 
       // Estruturas
       structures: {
-        mainspringStabilizers: 'Mainspring Stabilizers',
-        quantumLubricantInjectors: 'Quantum Lubricant Injectors',
+        mainspringStabilizers: {
+          name: 'Mainspring Stabilizers',
+          description: 'Generates 1 Chrono-Essence per second.',
+          flavor: '"Every second costs eternity. These springs ensure time flows, never stops."'
+        },
+        quantumLubricantInjectors: {
+          name: 'Quantum Lubricant Injectors',
+          description: 'Generates 1 Entropy Shard per second.',
+          flavor: '"Liquid paradox. What flows backward also moves forward—both, neither, eternally."'
+        },
       },
 
       // Botões de Ações
@@ -64,8 +72,16 @@ const i18n = {
 
       // Estruturas
       structures: {
-        mainspringStabilizers: 'Estabilizadores de Mola Principal',
-        quantumLubricantInjectors: 'Injetores de Lubrificante Quântico',
+        mainspringStabilizers: {
+          name: 'Estabilizadores de Mola Principal',
+          description: 'Gera 1 Chrono-Essence por segundo.',
+          flavor: '"Cada segundo custa uma eternidade. Estas molas garantem que o tempo flua, e nunca pare."'
+        },
+        quantumLubricantInjectors: {
+          name: 'Injetores de Lubrificante Quântico',
+          description: 'Gera 1 Entropy Shard por segundo.',
+          flavor: '"Paradoxo líquido. O que flui para trás também avança - ambos, nenhum, eternamente."'
+        },
       },
 
       // Botões de Ações
